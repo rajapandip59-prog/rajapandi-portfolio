@@ -7,10 +7,17 @@ import { toast } from "sonner";
 
 const Resume = () => {
   const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = "/resume.pdf";
+    link.download = "resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
     toast.success("Resume downloaded successfully!");
   };
 
   const handlePreview = () => {
+    window.open("/resume.pdf", "_blank", "noopener,noreferrer");
     toast.info("Opening resume preview...");
   };
 
@@ -96,7 +103,7 @@ const Resume = () => {
                     <div className="text-sm text-muted-foreground">Format</div>
                   </div>
                   <div className="p-4 rounded-xl bg-background/50">
-                    <div className="text-2xl font-bold gradient-text mb-1">2 Pages</div>
+                    <div className="text-2xl font-bold gradient-text mb-1">1 Pages</div>
                     <div className="text-sm text-muted-foreground">Length</div>
                   </div>
                   <div className="p-4 rounded-xl bg-background/50">
