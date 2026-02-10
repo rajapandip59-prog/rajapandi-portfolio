@@ -4,7 +4,7 @@ import { FloatingShape } from "@/components/FloatingShape";
 import { ArrowRight, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import profilePhoto from "@/assets/profile-photo.jpg";
+import profilePhoto from "@/assets/profile-photo.jpeg";
 
 const Hero = () => {
   const navigate = useNavigate();

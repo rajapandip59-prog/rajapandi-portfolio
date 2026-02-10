@@ -18,7 +18,7 @@ const Certificate = () => {
       issuer: "Oracle ",
       date: "2024-05-16",
       image: "https://drive.google.com/uc?export=view&id=1digs3-bAPHucQpwthJ-NFTaZnO5NKlPq",
-      credentialUrl: "https://drive.google.com/file/d/1digs3-bAPHucQpwthJ-NFTaZnO5NKlPq/view?usp=sharing",
+      credentialUrl: "/certificates/Oracle certificate.pdf",
       gradient: "from-primary to-accent",
     },
     {
@@ -26,7 +26,7 @@ const Certificate = () => {
       issuer: "Binance & AWS",
       date: "2025-09-13",
       image: "https://drive.google.com/uc?export=view&id=1digs3-bAPHucQpwthJ-NFTaZnO5NKlPq",
-      credentialUrl: "https://drive.google.com/file/d/1YJGsua17qPoZPbWtZjTlXuZB8wD--TA5/view?usp=sharing",
+      credentialUrl: "/certificates/Binance certificate.pdf",
       gradient: "from-secondary to-primary",
     },
     {
@@ -34,7 +34,7 @@ const Certificate = () => {
       issuer: "Amazon Web Services",
       date: "2023-09-10",
       image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&q=80&w=1000",
-      credentialUrl: "#",
+      credentialUrl: "/certificates/Rajapandi NM Certificate.pdf",
       gradient: "from-accent to-secondary",
     },
     {
@@ -42,7 +42,7 @@ const Certificate = () => {
       issuer: "Vel Tech",
       date: "2024-11-22",
       image: "https://drive.google.com/file/d/1dNtJnfqK9QngneXI820_cLJVvB1-R73y/view?usp=sharing",
-      credentialUrl: "https://drive.google.com/file/d/1dNtJnfqK9QngneXI820_cLJVvB1-R73y/view?usp=sharing",
+      credentialUrl: "/certificates/Vel Tech certificate.pdf",
       gradient: "from-primary to-secondary",
     },
     {
@@ -50,7 +50,7 @@ const Certificate = () => {
       issuer: "Infosys",
       date: "2025-10-08",
       image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=1000",
-      credentialUrl: "https://drive.google.com/file/d/1SItnyxpBPANwQu36uMrjOGaSP78GFRPG/view?usp=sharing",
+      credentialUrl: "/certificates/Rajapandi NM Certificate.pdf",
       gradient: "from-secondary to-accent",
     },
     {
@@ -58,7 +58,7 @@ const Certificate = () => {
       issuer: "ChatGPT",
       date: "2024-03-30",
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
-      credentialUrl: "https://drive.google.com/file/d/1d7VKALv8S1-hDGxk7Asmp_3CEeRmQYnx/view?usp=sharing",
+      credentialUrl: "/certificates/Chat gpt certificate.pdf",
       gradient: "from-accent to-primary",
     },
   ];

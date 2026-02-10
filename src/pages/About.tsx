@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { PageTransition } from "@/components/PageTransition";
 import { ParticleBackground } from "@/components/ParticleBackground";
 import { School, Award, GraduationCap, Calendar } from "lucide-react";
-import profilePhoto from "@/assets/profile-photo.jpg";
+import profilePhoto from "@/assets/profile-photo.jpeg";
 
 const About = () => {
   const achievements = [
