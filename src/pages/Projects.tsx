@@ -3,6 +3,7 @@ import { PageTransition } from "@/components/PageTransition";
 import { ParticleBackground } from "@/components/ParticleBackground";
 import { ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import portfolioCover from "@/assets/portfolio-project-cover.png";
 
 const Projects = () => {
   const projects = [
@@ -10,7 +11,8 @@ const Projects = () => {
       title: "Portfilio",
       description: "A full-stack e-commerce solution with real-time inventory management",
       tech: ["React", "Node.js", "MongoDB", "Stripe"],
-      gradient: "from-primary to-accent",
+      gradient: "bg-primary",
+      image: portfolioCover,
       githubUrl: "https://github.com/rajapandip59-prog/rajapandi-portfolio",
       liveUrl: "https://portfolio.example.com",
     },
@@ -18,7 +20,7 @@ const Projects = () => {
       title: "AI Analytics Dashboard",
       description: "Machine learning powered analytics platform for business insights",
       tech: ["React", "Python", "TensorFlow", "D3.js"],
-      gradient: "from-secondary to-primary",
+      gradient: "bg-secondary",
       githubUrl: "https://github.com/rajapandip59-prog/ai-analytics-dashboard",
       liveUrl: "https://ai-analytics.example.com",
     },
@@ -26,7 +28,7 @@ const Projects = () => {
       title: "Social Media App",
       description: "Real-time social networking platform with video calls",
       tech: ["React Native", "Firebase", "WebRTC"],
-      gradient: "from-accent to-secondary",
+      gradient: "bg-accent",
       githubUrl: "https://github.com/rajapandip59-prog/social-media-app",
       liveUrl: "https://social.example.com",
     },
@@ -34,7 +36,7 @@ const Projects = () => {
       title: "Crypto Trading Bot",
       description: "Automated cryptocurrency trading system with ML algorithms",
       tech: ["Python", "React", "PostgreSQL", "Redis"],
-      gradient: "from-primary to-secondary",
+      gradient: "bg-primary",
       githubUrl: "https://github.com/rajapandip59-prog/crypto-trading-bot",
       liveUrl: "https://crypto-bot.example.com",
     },
@@ -42,7 +44,7 @@ const Projects = () => {
       title: "Project Management Tool",
       description: "Collaborative project management with real-time updates",
       tech: ["Next.js", "GraphQL", "Prisma", "PostgreSQL"],
-      gradient: "from-secondary to-accent",
+      gradient: "bg-secondary",
       githubUrl: "https://github.com/rajapandip59-prog/project-management-tool",
       liveUrl: "https://pm-tool.example.com",
     },
@@ -50,7 +52,7 @@ const Projects = () => {
       title: "NFT Marketplace",
       description: "Decentralized marketplace for buying and selling NFTs",
       tech: ["React", "Solidity", "Web3.js", "IPFS"],
-      gradient: "from-accent to-primary",
+      gradient: "bg-accent",
       githubUrl: "https://github.com/rajapandip59-prog/nft-marketplace",
       liveUrl: "https://nft-market.example.com",
     },
@@ -89,8 +91,15 @@ const Projects = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="glass rounded-2xl overflow-hidden group hover:glow-primary transition-all duration-300"
               >
-                <div className={`h-48 bg-gradient-to-br ${project.gradient} relative`}>
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+                <div className={`h-48 ${project.gradient} relative overflow-hidden`}>
+                  {project.image && (
+                    <img
+                      src={project.image}
+                      alt={`${project.title} cover`}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
                 </div>
                 
                 <div className="p-6">

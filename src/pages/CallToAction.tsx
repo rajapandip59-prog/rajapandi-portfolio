@@ -27,7 +27,7 @@ const CallToAction = () => {
               transition={{ duration: 0.6, type: "spring" }}
               className="inline-block mb-8"
             >
-              <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary via-accent to-secondary flex items-center justify-center glow-primary animate-float">
+              <div className="w-32 h-32 rounded-full bg-primary flex items-center justify-center glow-primary animate-float">
                 <Sparkles className="w-16 h-16 text-white" />
               </div>
             </motion.div>

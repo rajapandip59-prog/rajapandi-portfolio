@@ -19,7 +19,7 @@ const Certificate = () => {
       date: "2024-05-16",
       image: "https://drive.google.com/uc?export=view&id=1digs3-bAPHucQpwthJ-NFTaZnO5NKlPq",
       credentialUrl: "/certificates/Oracle certificate.pdf",
-      gradient: "from-primary to-accent",
+      gradient: "bg-primary",
     },
     {
       title: "AWS Blockchain Node Runner For BNB Chain",
@@ -27,7 +27,7 @@ const Certificate = () => {
       date: "2025-09-13",
       image: "https://drive.google.com/uc?export=view&id=1digs3-bAPHucQpwthJ-NFTaZnO5NKlPq",
       credentialUrl: "/certificates/Binance certificate.pdf",
-      gradient: "from-secondary to-primary",
+      gradient: "bg-secondary",
     },
     {
       title: "AWS Certified Solutions Architect",
@@ -35,7 +35,7 @@ const Certificate = () => {
       date: "2023-09-10",
       image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&q=80&w=1000",
       credentialUrl: "/certificates/Rajapandi NM Certificate.pdf",
-      gradient: "from-accent to-secondary",
+      gradient: "bg-accent",
     },
     {
       title: "Effective sales and marketing strategies for Entrepreneurs/ Startups",
@@ -43,7 +43,7 @@ const Certificate = () => {
       date: "2024-11-22",
       image: "https://drive.google.com/file/d/1dNtJnfqK9QngneXI820_cLJVvB1-R73y/view?usp=sharing",
       credentialUrl: "/certificates/Vel Tech certificate.pdf",
-      gradient: "from-primary to-secondary",
+      gradient: "bg-primary",
     },
     {
       title: "Continuous Integration and Delivery - DevOps",
@@ -51,7 +51,7 @@ const Certificate = () => {
       date: "2025-10-08",
       image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=1000",
       credentialUrl: "/certificates/Rajapandi NM Certificate.pdf",
-      gradient: "from-secondary to-accent",
+      gradient: "bg-secondary",
     },
     {
       title: "ChtaGPT & AI Tools Workshop",
@@ -59,7 +59,7 @@ const Certificate = () => {
       date: "2024-03-30",
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
       credentialUrl: "/certificates/Chat gpt certificate.pdf",
-      gradient: "from-accent to-primary",
+      gradient: "bg-accent",
     },
   ];
 
@@ -96,7 +96,7 @@ const Certificate = () => {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="glass rounded-2xl overflow-hidden hover:glow-primary transition-all duration-300 group cursor-pointer h-full flex flex-col"
                   >
-                    <div className={`h-48 bg-gradient-to-br ${cert.gradient} relative overflow-hidden`}>
+                    <div className={`h-48 ${cert.gradient} relative overflow-hidden`}>
                       <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
                       <img
                         src={cert.image}
@@ -146,7 +146,7 @@ const Certificate = () => {
                       alt={cert.title}
                       className="w-full h-full object-contain"
                     />
-                    <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
+                    <div className="absolute bottom-0 left-0 right-0 p-6 bg-black/70 text-white">
                       <h3 className="text-2xl font-bold mb-2">{cert.title}</h3>
                       <p className="text-white/80">Issued by {cert.issuer} on {new Date(cert.date).toLocaleDateString()}</p>
                     </div>
