@@ -32,17 +32,22 @@ const Hero = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, type: "spring" }}
               className="flex-shrink-0"
+              style={{ perspective: 800 }}
             >
-              <div className="relative group">
-                <div className="absolute -inset-4 bg-gradient-to-r from-primary via-accent to-secondary rounded-full blur-2xl opacity-75 group-hover:opacity-100 animate-glow-pulse" />
-                <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary/50 glow-primary">
+              <motion.div
+                className="relative group"
+                whileHover={{ scale: 1.05, rotateY: 15, rotateX: -10 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <div className="absolute -inset-4 bg-primary/40 rounded-full blur-2xl opacity-75 group-hover:opacity-100 animate-glow-pulse" />
+                <div className="relative w-56 h-56 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-primary/50 glow-primary">
                   <img
                     src={profilePhoto}
                     alt="Professional profile"
                     className="w-full h-full object-cover"
                   />
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
 
             {/* Text Content */}

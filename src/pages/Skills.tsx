@@ -1,24 +1,38 @@
 import { motion } from "framer-motion";
 import { PageTransition } from "@/components/PageTransition";
 import { ParticleBackground } from "@/components/ParticleBackground";
-import { useState, useEffect } from "react";
+import { useState, useEffect, type ElementType } from "react";
+import {
+  Atom,
+  Braces,
+  Server,
+  Database,
+  Cloud,
+  GitBranch,
+  Sparkles,
+  Wind,
+  Network,
+  Code,
+  Blocks,
+  Container,
+} from "lucide-react";
 
 const Skills = () => {
   const skills = [
-    { name: "React/Next.js", level: 95, category: "Frontend" },
-    { name: "TypeScript", level: 90, category: "Languages" },
-    { name: "Node.js", level: 88, category: "Backend" },
-    { name: "Python", level: 98, category: "Languages" },
-    { name: "Three.js", level: 80, category: "3D/Animation" },
-    { name: "GraphQL", level: 82, category: "Backend" },
-    { name: "Tailwind CSS", level: 90, category: "Frontend" },
-    { name: "MongoDB", level: 85, category: "Database" },
-    { name: "PostgreSQL", level: 87, category: "Database" },
-    { name: "Docker", level: 71, category: "DevOps" },
-    { name: "AWS", level: 60, category: "Cloud" },
-    { name: "GCP", level: 60, category: "Cloud" },
-    { name: "Git", level: 92, category: "DevOps" },
-    { name: "Framer Motion", level: 92, category: "3D/Animation" },
+    { name: "React/Next.js", level: 95, category: "Frontend", icon: Atom },
+    { name: "TypeScript", level: 90, category: "Languages", icon: Braces },
+    { name: "Node.js", level: 88, category: "Backend", icon: Server },
+    { name: "Python", level: 98, category: "Languages", icon: Code },
+    { name: "Three.js", level: 80, category: "3D/Animation", icon: Blocks },
+    { name: "GraphQL", level: 82, category: "Backend", icon: Network },
+    { name: "Tailwind CSS", level: 90, category: "Frontend", icon: Wind },
+    { name: "MongoDB", level: 85, category: "Database", icon: Database },
+    { name: "PostgreSQL", level: 87, category: "Database", icon: Database },
+    { name: "Docker", level: 71, category: "DevOps", icon: Container },
+    { name: "AWS", level: 60, category: "Cloud", icon: Cloud },
+    { name: "GCP", level: 60, category: "Cloud", icon: Cloud },
+    { name: "Git", level: 92, category: "DevOps", icon: GitBranch },
+    { name: "Framer Motion", level: 92, category: "3D/Animation", icon: Sparkles },
   ];
 
   const categories = ["All", "Frontend", "Backend", "Languages", "Database", "DevOps", "Cloud", "3D/Animation"];
@@ -85,8 +99,9 @@ const Skills = () => {
   );
 };
 
-const SkillBar = ({ skill, index }: { skill: { name: string; level: number; category: string }; index: number }) => {
+const SkillBar = ({ skill, index }: { skill: { name: string; level: number; category: string; icon: ElementType }; index: number }) => {
   const [animatedLevel, setAnimatedLevel] = useState(0);
+  const Icon = skill.icon ?? Code2;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -103,9 +118,15 @@ const SkillBar = ({ skill, index }: { skill: { name: string; level: number; cate
       transition={{ duration: 0.5, delay: index * 0.05 }}
       className="glass p-6 rounded-xl hover:glow-primary transition-all duration-300"
     >
-      <div className="flex justify-between items-center mb-3">
+      <div className="flex justify-between items-center mb-4">
         <span className="font-semibold text-foreground">{skill.name}</span>
-        <span className="text-sm text-primary font-bold">{skill.level}%</span>
+      </div>
+
+      <div className="flex flex-col items-center text-center mb-4">
+        <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-2">
+          <Icon className="w-6 h-6 text-primary" />
+        </div>
+        <div className="text-sm text-primary font-bold">{skill.level}%</div>
       </div>
       
       <div className="h-3 bg-muted rounded-full overflow-hidden">
@@ -113,9 +134,9 @@ const SkillBar = ({ skill, index }: { skill: { name: string; level: number; cate
           initial={{ width: 0 }}
           animate={{ width: `${animatedLevel}%` }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="h-full bg-gradient-to-r from-primary via-accent to-secondary rounded-full relative"
+          className="h-full bg-primary rounded-full relative"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" />
+          <div className="absolute inset-0 bg-white/10 animate-pulse" />
         </motion.div>
       </div>
       

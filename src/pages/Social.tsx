@@ -10,7 +10,7 @@ const Social = () => {
       icon: Github,
       username: "@rajapandip59-prog",
       followers: "10K+ followers",
-      gradient: "from-gray-700 to-gray-900",
+      gradient: "bg-zinc-900",
       url: "https://github.com/rajapandip59-prog",
     },
     {
@@ -18,7 +18,7 @@ const Social = () => {
       icon: Linkedin,
       username: "@rajapandi-p",
       followers: "100+ connections",
-      gradient: "from-blue-600 to-blue-800",
+      gradient: "bg-blue-700",
       url: "https://www.linkedin.com/in/rajapandi-p/",
     },
     {
@@ -26,7 +26,7 @@ const Social = () => {
       icon: X,
       username: "@RajapandiP70029",
       followers: "8K+ followers",
-      gradient: "from-sky-400 to-sky-600",
+      gradient: "bg-sky-500",
       url: "https://twitter.com/RajapandiP70029",
     },
     {
@@ -34,7 +34,7 @@ const Social = () => {
       icon: Instagram,
       username: "@creative",
       followers: "3K+ followers",
-      gradient: "from-purple-600 via-pink-600 to-orange-500",
+      gradient: "bg-pink-600",
       url: "https://instagram.com",
     },
     {
@@ -42,7 +42,7 @@ const Social = () => {
       icon: Youtube,
       username: "@channel",
       followers: "2K+ subscribers",
-      gradient: "from-red-600 to-red-700",
+      gradient: "bg-red-600",
       url: "https://youtube.com",
     },
     {
@@ -50,7 +50,7 @@ const Social = () => {
       icon: Mail,
       username: "rajapandip59@gmail.com",
       followers: "Always available",
-      gradient: "from-teal-500 to-teal-700",
+      gradient: "bg-teal-600",
       url: "mailto:rajapandip59@gmail.com",
     },
   ];
@@ -93,10 +93,10 @@ const Social = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="glass rounded-2xl p-8 hover:glow-primary transition-all duration-300 group cursor-pointer relative overflow-hidden"
                 >
-                  <div className={`absolute inset-0 bg-gradient-to-br ${social.gradient} opacity-0 group-hover:opacity-20 transition-opacity`} />
+                  <div className={`absolute inset-0 ${social.gradient} opacity-0 group-hover:opacity-20 transition-opacity`} />
                   
                   <div className="relative z-10">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                       <Icon className="w-8 h-8 text-white" />
                     </div>
 

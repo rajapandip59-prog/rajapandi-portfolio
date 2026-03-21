@@ -51,7 +51,7 @@ const About = () => {
                 className="flex-shrink-0"
               >
                 <div className="relative group">
-                  <div className="absolute -inset-3 bg-gradient-to-r from-primary via-accent to-secondary rounded-full blur-xl opacity-75 group-hover:opacity-100 animate-glow-pulse" />
+                  <div className="absolute -inset-3 bg-primary/40 rounded-full blur-xl opacity-75 group-hover:opacity-100 animate-glow-pulse" />
                   <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-primary/50 glow-primary">
                     <img
                       src={profilePhoto}

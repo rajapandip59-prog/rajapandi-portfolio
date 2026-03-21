@@ -11,7 +11,7 @@ const CodingProfiles = () => {
       username: "@rajapandip59-prog",
       url: "https://github.com/rajapandip59-prog",
       stats: { label: "Repositories", value: "1+" },
-      color: "from-purple-500 to-pink-500",
+      color: "bg-purple-500",
       icon: "🐙",
     },
     {
@@ -19,7 +19,7 @@ const CodingProfiles = () => {
       username: "@coder",
       url: "https://leetcode.com/coder",
       stats: { label: "Problems Solved", value: "500+" },
-      color: "from-orange-500 to-yellow-500",
+      color: "bg-orange-500",
       icon: "💻",
     },
     {
@@ -27,7 +27,7 @@ const CodingProfiles = () => {
       username: "@competitive",
       url: "https://codeforces.com/profile/competitive",
       stats: { label: "Rating", value: "1800+" },
-      color: "from-blue-500 to-cyan-500",
+      color: "bg-blue-500",
       icon: "⚡",
     },
     {
@@ -35,7 +35,7 @@ const CodingProfiles = () => {
       username: "@hacker",
       url: "https://www.hackerrank.com/hacker",
       stats: { label: "Stars", value: "5 ⭐" },
-      color: "from-green-500 to-emerald-500",
+      color: "bg-emerald-500",
       icon: "🏆",
     },
     {
@@ -43,7 +43,7 @@ const CodingProfiles = () => {
       username: "@expert",
       url: "https://stackoverflow.com/users/12345678/expert",
       stats: { label: "Reputation", value: "15k+" },
-      color: "from-orange-600 to-orange-400",
+      color: "bg-orange-600",
       icon: "📚",
     },
     {
@@ -51,7 +51,7 @@ const CodingProfiles = () => {
       username: "@creative",
       url: "https://codepen.io/creative",
       stats: { label: "Projects", value: "80+" },
-      color: "from-pink-500 to-rose-500",
+      color: "bg-pink-500",
       icon: "🎨",
     },
   ];
@@ -88,7 +88,7 @@ const CodingProfiles = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="glass rounded-2xl p-8 hover:glow-primary transition-all duration-300 group relative overflow-hidden"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${profile.color} opacity-0 group-hover:opacity-10 transition-opacity`} />
+                <div className={`absolute inset-0 ${profile.color} opacity-0 group-hover:opacity-10 transition-opacity`} />
                 
                 <div className="relative z-10">
                   <div className="text-6xl mb-4">{profile.icon}</div>
@@ -143,7 +143,7 @@ const CodingProfiles = () => {
             <div className="glass p-8 rounded-2xl">
               <div className="flex flex-col md:flex-row items-center gap-8">
                 <div className="flex-shrink-0">
-                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary via-accent to-secondary flex items-center justify-center glow-primary">
+                  <div className="w-24 h-24 rounded-full bg-primary flex items-center justify-center glow-primary">
                     <Trophy className="w-12 h-12 text-white" />
                   </div>
                 </div>

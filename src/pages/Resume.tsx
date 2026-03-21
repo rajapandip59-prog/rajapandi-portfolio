@@ -41,7 +41,7 @@ const Resume = () => {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-br from-primary via-accent to-secondary flex items-center justify-center glow-primary"
+                className="w-32 h-32 mx-auto mb-8 rounded-full bg-primary flex items-center justify-center glow-primary"
               >
                 <FileText className="w-16 h-16 text-white" />
               </motion.div>

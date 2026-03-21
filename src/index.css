@@ -38,11 +38,6 @@ All colors MUST be HSL.
 
     --radius: 0.75rem;
 
-    /* Custom gradient colors */
-    --gradient-start: 280 80% 60%;
-    --gradient-mid: 260 80% 55%;
-    --gradient-end: 190 80% 50%;
-    
     /* Glow effects */
     --glow-primary: 280 80% 60%;
     --glow-secondary: 190 80% 50%;
@@ -59,9 +54,9 @@ All colors MUST be HSL.
     @apply bg-background text-foreground overflow-x-hidden;
   }
 
-  /* Gradient text effect */
+  /* Accent text */
   .gradient-text {
-    @apply bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent;
+    @apply text-primary;
   }
 
   /* Glass morphism */
@@ -83,27 +78,6 @@ All colors MUST be HSL.
   .glow-accent {
     box-shadow: 0 0 20px hsl(var(--glow-accent) / 0.3),
                 0 0 40px hsl(var(--glow-accent) / 0.2);
-  }
-
-  /* Animated gradient background */
-  .animated-gradient {
-    background: linear-gradient(
-      135deg,
-      hsl(var(--gradient-start)) 0%,
-      hsl(var(--gradient-mid)) 50%,
-      hsl(var(--gradient-end)) 100%
-    );
-    background-size: 200% 200%;
-    animation: gradient-shift 8s ease infinite;
-  }
-
-  @keyframes gradient-shift {
-    0%, 100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
   }
 
   /* Smooth scroll */
