@@ -5,15 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { Navigation } from "@/components/Navigation";
-import Hero from "./pages/Hero";
-import About from "./pages/About";
-import Projects from "./pages/Projects";
-import Skills from "./pages/Skills";
-import Contact from "./pages/Contact";
+import Home from "./pages/Home";
 import Resume from "./pages/Resume";
-import Certificate from "./pages/Certificate";
-import CodingProfiles from "./pages/CodingProfiles";
-import Social from "./pages/Social";
 import CallToAction from "./pages/CallToAction";
 import NotFound from "./pages/NotFound";
 
@@ -29,15 +22,15 @@ const App = () => (
           <Navigation />
           <AnimatePresence mode="wait">
             <Routes>
-              <Route path="/" element={<Hero />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/skills" element={<Skills />} />
-              <Route path="/contact" element={<Contact />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<Home />} />
+              <Route path="/projects" element={<Home />} />
+              <Route path="/skills" element={<Home />} />
+              <Route path="/contact" element={<Home />} />
+              <Route path="/certificates" element={<Home />} />
+              <Route path="/profiles" element={<Home />} />
+              <Route path="/social" element={<Home />} />
               <Route path="/resume" element={<Resume />} />
-              <Route path="/certificates" element={<Certificate />} />
-              <Route path="/profiles" element={<CodingProfiles />} />
-              <Route path="/social" element={<Social />} />
               <Route path="/hire" element={<CallToAction />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

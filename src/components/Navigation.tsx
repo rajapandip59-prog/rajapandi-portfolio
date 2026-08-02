@@ -1,21 +1,62 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const navItems = [
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
-  { name: "Projects", path: "/projects" },
-  { name: "Skills", path: "/skills" },
-  { name: "Certificates", path: "/certificates" },
-  { name: "Profiles", path: "/profiles" },
-  { name: "Social", path: "/social" },
-  { name: "Contact", path: "/contact" },
+  { name: "Home", path: "/", sectionId: "hero" },
+  { name: "About", path: "/about", sectionId: "about" },
+  { name: "Skills", path: "/skills", sectionId: "skills" },
+  { name: "Projects", path: "/projects", sectionId: "projects" },
+  { name: "Certificates", path: "/certificates", sectionId: "certificates" },
+  { name: "Profiles", path: "/profiles", sectionId: "profiles" },
+  { name: "Social", path: "/social", sectionId: "social" },
+  { name: "Contact", path: "/contact", sectionId: "contact" },
 ];
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const sectionIds = navItems.map((item) => item.sectionId);
+    const observerCallback: IntersectionObserverCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observerOptions: IntersectionObserverInit = {
+      root: document.querySelector(".snap-container") || null,
+      threshold: 0.5,
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    sectionIds.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
+  const handleNavClick = (item: (typeof navItems)[0], e: React.MouseEvent) => {
+    const element = document.getElementById(item.sectionId);
+    if (element) {
+      e.preventDefault();
+      element.scrollIntoView({ behavior: "smooth" });
+      setActiveSection(item.sectionId);
+      window.history.pushState({}, "", item.path);
+    } else {
+      navigate(item.path);
+    }
+    setIsOpen(false);
+  };
 
   return (
     <motion.nav
@@ -30,32 +71,35 @@ export const Navigation = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-2xl font-bold gradient-text"
+            className="text-2xl font-bold gradient-text cursor-pointer"
+            onClick={(e) => handleNavClick(navItems[0], e as any)}
           >
             RAJAPANDI P
           </motion.div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item, index) => (
-              <motion.div
-                key={item.path}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index }}
-              >
-                <NavLink
-                  to={item.path}
-                  className={({ isActive }) =>
-                    `text-sm font-medium transition-all duration-300 hover:text-primary ${
-                      isActive ? "text-primary" : "text-muted-foreground"
-                    }`
-                  }
+            {navItems.map((item, index) => {
+              const isActive = activeSection === item.sectionId;
+              return (
+                <motion.div
+                  key={item.path}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * index }}
                 >
-                  {item.name}
-                </NavLink>
-              </motion.div>
-            ))}
+                  <a
+                    href={item.path}
+                    onClick={(e) => handleNavClick(item, e)}
+                    className={`text-sm font-medium transition-all duration-300 hover:text-primary ${
+                      isActive ? "text-primary font-semibold" : "text-muted-foreground"
+                    }`}
+                  >
+                    {item.name}
+                  </a>
+                </motion.div>
+              );
+            })}
           </div>
 
           {/* Mobile Menu Button */}
@@ -75,20 +119,21 @@ export const Navigation = () => {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden mt-4 pb-4"
           >
-            {navItems.map((item) => (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                onClick={() => setIsOpen(false)}
-                className={({ isActive }) =>
-                  `block py-2 text-sm font-medium transition-all duration-300 hover:text-primary ${
-                    isActive ? "text-primary" : "text-muted-foreground"
-                  }`
-                }
-              >
-                {item.name}
-              </NavLink>
-            ))}
+            {navItems.map((item) => {
+              const isActive = activeSection === item.sectionId;
+              return (
+                <a
+                  key={item.path}
+                  href={item.path}
+                  onClick={(e) => handleNavClick(item, e)}
+                  className={`block py-2 text-sm font-medium transition-all duration-300 hover:text-primary ${
+                    isActive ? "text-primary font-semibold" : "text-muted-foreground"
+                  }`}
+                >
+                  {item.name}
+                </a>
+              );
+            })}
           </motion.div>
         )}
       </div>
