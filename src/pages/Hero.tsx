@@ -12,7 +12,7 @@ const Hero = () => {
   return (
     <div className="min-h-screen relative overflow-hidden flex items-center justify-center">
       <ParticleBackground />
-      
+
       {/* Animated gradient blurs */}
       <div className="absolute top-20 left-20 w-96 h-96 bg-primary/30 rounded-full blur-[120px] animate-pulse" />
       <div className="absolute bottom-20 right-20 w-96 h-96 bg-secondary/30 rounded-full blur-[120px] animate-pulse delay-1000" />
@@ -58,7 +58,7 @@ const Hero = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
-                  <span className="gradient-text">AI Engineer & Data Scientist</span>
+                  <span className="gradient-text">AI/ML Engineer </span>
                 </h1>
               </motion.div>
 
@@ -86,7 +86,7 @@ const Hero = () => {
                   Get In Touch
                   <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
-                
+
                 <Button
                   onClick={() => navigate("/resume")}
                   size="lg"

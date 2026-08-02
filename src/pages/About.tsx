@@ -52,7 +52,7 @@ const About = () => {
               >
                 <div className="relative group">
                   <div className="absolute -inset-3 bg-primary/40 rounded-full blur-xl opacity-75 group-hover:opacity-100 animate-glow-pulse" />
-                  <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-primary/50 glow-primary">
+                  <div className="relative w-60 h-60 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-primary/50 glow-primary">
                     <img
                       src={profilePhoto}
                       alt="Profile"
