@@ -7,10 +7,10 @@ import { usePortfolioData } from "@/context/PortfolioDataContext";
 const navItems = [
   { name: "Home", path: "/", sectionId: "hero" },
   { name: "About", path: "/about", sectionId: "about" },
+  { name: "Experience", path: "/experience", sectionId: "experience" },
   { name: "Skills", path: "/skills", sectionId: "skills" },
   { name: "Projects", path: "/projects", sectionId: "projects" },
   { name: "Certificates", path: "/certificates", sectionId: "certificates" },
-  { name: "Profiles", path: "/profiles", sectionId: "profiles" },
   { name: "Social", path: "/social", sectionId: "social" },
   { name: "Contact", path: "/contact", sectionId: "contact" },
 ];

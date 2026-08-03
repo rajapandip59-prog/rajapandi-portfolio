@@ -3,9 +3,9 @@ import { useLocation } from "react-router-dom";
 import Hero from "./Hero";
 import About from "./About";
 import Skills from "./Skills";
+import ExperiencePage from "./Experience";
 import Projects from "./Projects";
 import Certificate from "./Certificate";
-import CodingProfiles from "./CodingProfiles";
 import Social from "./Social";
 import Contact from "./Contact";
 
@@ -35,6 +35,9 @@ const Home = () => {
       <section id="about" className="snap-section">
         <About />
       </section>
+      <section id="experience" className="snap-section">
+        <ExperiencePage />
+      </section>
       <section id="skills" className="snap-section">
         <Skills />
       </section>
@@ -43,9 +46,6 @@ const Home = () => {
       </section>
       <section id="certificates" className="snap-section">
         <Certificate />
-      </section>
-      <section id="profiles" className="snap-section">
-        <CodingProfiles />
       </section>
       <section id="social" className="snap-section">
         <Social />
