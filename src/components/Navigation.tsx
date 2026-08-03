@@ -1,7 +1,8 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShieldCheck } from "lucide-react";
 import { useState, useEffect } from "react";
+import { usePortfolioData } from "@/context/PortfolioDataContext";
 
 const navItems = [
   { name: "Home", path: "/", sectionId: "hero" },
@@ -19,6 +20,7 @@ export const Navigation = () => {
   const [activeSection, setActiveSection] = useState("hero");
   const location = useLocation();
   const navigate = useNavigate();
+  const { profile } = usePortfolioData();
 
   useEffect(() => {
     const sectionIds = navItems.map((item) => item.sectionId);
@@ -71,14 +73,14 @@ export const Navigation = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-2xl font-bold gradient-text cursor-pointer"
+            className="text-2xl font-bold gradient-text cursor-pointer uppercase"
             onClick={(e) => handleNavClick(navItems[0], e as any)}
           >
-            RAJAPANDI P
+            {profile.name || "RAJAPANDI P"}
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-7">
             {navItems.map((item, index) => {
               const isActive = activeSection === item.sectionId;
               return (
@@ -100,15 +102,36 @@ export const Navigation = () => {
                 </motion.div>
               );
             })}
+
+            {/* Discreet Admin CMS Link */}
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+              onClick={() => navigate("/admin")}
+              title="Admin CMS Login"
+              className="p-2 rounded-full text-slate-400 hover:text-primary hover:bg-primary/10 transition-colors"
+            >
+              <ShieldCheck className="w-4 h-4" />
+            </motion.button>
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-foreground"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <button
+              onClick={() => navigate("/admin")}
+              className="p-1.5 text-slate-400 hover:text-primary"
+              title="Admin Login"
+            >
+              <ShieldCheck className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-foreground"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
@@ -117,7 +140,7 @@ export const Navigation = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden mt-4 pb-4"
+            className="md:hidden mt-4 pb-4 space-y-1"
           >
             {navItems.map((item) => {
               const isActive = activeSection === item.sectionId;
@@ -134,6 +157,17 @@ export const Navigation = () => {
                 </a>
               );
             })}
+            <a
+              href="/admin/login"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/admin/login");
+                setIsOpen(false);
+              }}
+              className="block py-2 text-sm font-semibold text-primary"
+            >
+              🔐 Admin Dashboard
+            </a>
           </motion.div>
         )}
       </div>

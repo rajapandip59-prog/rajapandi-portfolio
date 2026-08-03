@@ -1,67 +1,34 @@
 import { motion } from "framer-motion";
 import { PageTransition } from "@/components/PageTransition";
 import { ParticleBackground } from "@/components/ParticleBackground";
-import { Github, Linkedin, Twitter, Instagram, Youtube, Mail, X } from "lucide-react";
+import { Github, Linkedin, Twitter, Instagram, Youtube, Mail, X, Share2 } from "lucide-react";
+import { usePortfolioData } from "@/context/PortfolioDataContext";
+
+const iconMap: Record<string, any> = {
+  Github,
+  Linkedin,
+  Twitter,
+  X,
+  Instagram,
+  Youtube,
+  Mail,
+  Share2,
+};
 
 const Social = () => {
-  const socialLinks = [
-    {
-      name: "GitHub",
-      icon: Github,
-      username: "@rajapandip59-prog",
-      followers: "10K+ followers",
-      gradient: "bg-zinc-900",
-      url: "https://github.com/rajapandip59-prog",
-    },
-    {
-      name: "LinkedIn",
-      icon: Linkedin,
-      username: "@rajapandi-p",
-      followers: "100+ connections",
-      gradient: "bg-blue-700",
-      url: "https://www.linkedin.com/in/rajapandi-p/",
-    },
-    {
-      name: "X",
-      icon: X,
-      username: "@RajapandiP70029",
-      followers: "8K+ followers",
-      gradient: "bg-sky-500",
-      url: "https://twitter.com/RajapandiP70029",
-    },
-    {
-      name: "Instagram",
-      icon: Instagram,
-      username: "@creative",
-      followers: "3K+ followers",
-      gradient: "bg-pink-600",
-      url: "https://instagram.com",
-    },
-    {
-      name: "YouTube",
-      icon: Youtube,
-      username: "@channel",
-      followers: "2K+ subscribers",
-      gradient: "bg-red-600",
-      url: "https://youtube.com",
-    },
-    {
-      name: "Email",
-      icon: Mail,
-      username: "rajapandip59@gmail.com",
-      followers: "Always available",
-      gradient: "bg-teal-600",
-      url: "mailto:rajapandip59@gmail.com",
-    },
-  ];
+  const { socialLinks } = usePortfolioData();
+
+  const sortedLinks = [...socialLinks].sort(
+    (a, b) => (a.order || 0) - (b.order || 0)
+  );
 
   return (
     <PageTransition>
       <div className="min-h-screen relative overflow-hidden pt-24 pb-16">
         <ParticleBackground />
-        
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[120px] animate-pulse delay-700" />
+
+        <div className="absolute top-20 left-20 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-secondary/20 rounded-full blur-[120px] animate-pulse delay-500" />
 
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
@@ -71,73 +38,43 @@ const Social = () => {
             className="text-center mb-16"
           >
             <h1 className="text-5xl md:text-6xl font-bold mb-6 gradient-text">
-              Let's Connect
+              Connect With Me
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Follow me on social media and stay updated with my latest projects
-              and insights
+              Follow my journey, check out my work, or get in touch across various platforms
             </p>
           </motion.div>
 
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {socialLinks.map((social, index) => {
-              const Icon = social.icon;
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {sortedLinks.map((social, index) => {
+              const Icon = iconMap[social.iconName] || Share2;
               return (
                 <motion.a
-                  key={social.name}
+                  key={social.id}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 50 }}
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="glass rounded-2xl p-8 hover:glow-primary transition-all duration-300 group cursor-pointer relative overflow-hidden"
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  className="glass p-6 rounded-2xl hover:glow-primary transition-all duration-300 group flex items-center gap-6"
                 >
-                  <div className={`absolute inset-0 ${social.gradient} opacity-0 group-hover:opacity-20 transition-opacity`} />
-                  
-                  <div className="relative z-10">
-                    <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                      <Icon className="w-8 h-8 text-white" />
-                    </div>
+                  <div className={`w-14 h-14 rounded-2xl ${social.gradient || "bg-primary"} flex items-center justify-center text-white group-hover:scale-110 transition-transform shadow-lg`}>
+                    <Icon className="w-7 h-7" />
+                  </div>
 
-                    <h3 className="text-2xl font-bold mb-2 gradient-text">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-xl font-bold mb-1 group-hover:gradient-text transition-all">
                       {social.name}
                     </h3>
-
-                    <p className="text-sm text-muted-foreground mb-1">
-                      {social.username}
-                    </p>
-
-                    <p className="text-xs text-muted-foreground/70">
-                      {social.followers}
-                    </p>
-
-                    <div className="mt-4 pt-4 border-t border-border/50">
-                      <span className="text-sm text-primary group-hover:underline">
-                        Follow me →
-                      </span>
-                    </div>
+                    <p className="text-sm text-slate-300 truncate font-mono">{social.username}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{social.subtext}</p>
                   </div>
                 </motion.a>
               );
             })}
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-16 text-center"
-          >
-            <div className="glass p-8 rounded-2xl inline-block">
-              <p className="text-lg text-muted-foreground mb-4">
-                Want to collaborate or just say hi?
-              </p>
-              <p className="text-2xl font-bold gradient-text">
-                I'd love to hear from you! 👋
-              </p>
-            </div>
-          </motion.div>
         </div>
       </div>
     </PageTransition>

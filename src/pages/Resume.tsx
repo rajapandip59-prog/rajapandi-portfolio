@@ -4,20 +4,31 @@ import { ParticleBackground } from "@/components/ParticleBackground";
 import { Button } from "@/components/ui/button";
 import { Download, Eye, FileText } from "lucide-react";
 import { toast } from "sonner";
+import { usePortfolioData } from "@/context/PortfolioDataContext";
 
 const Resume = () => {
+  const { resume } = usePortfolioData();
+
   const handleDownload = () => {
+    if (!resume.fileUrl) {
+      toast.error("No resume file uploaded yet.");
+      return;
+    }
     const link = document.createElement("a");
-    link.href = "/resume.pdf";
-    link.download = "resume.pdf";
+    link.href = resume.fileUrl;
+    link.download = resume.fileName || "resume.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    toast.success("Resume downloaded successfully!");
+    toast.success("Resume download started!");
   };
 
   const handlePreview = () => {
-    window.open("/resume.pdf", "_blank", "noopener,noreferrer");
+    if (!resume.fileUrl) {
+      toast.error("No resume file uploaded yet.");
+      return;
+    }
+    window.open(resume.fileUrl, "_blank", "noopener,noreferrer");
     toast.info("Opening resume preview...");
   };
 
@@ -25,7 +36,7 @@ const Resume = () => {
     <PageTransition>
       <div className="min-h-screen relative overflow-hidden pt-24 pb-16 flex items-center justify-center">
         <ParticleBackground />
-        
+
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-[120px] animate-pulse delay-500" />
 
@@ -50,19 +61,18 @@ const Resume = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="text-5xl md:text-6xl font-bold mb-6 gradient-text"
+                className="text-5xl md:text-6xl font-bold mb-4 gradient-text"
               >
-                My Resume
+                {resume.title || "My Resume"}
               </motion.h1>
 
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
+                className="text-muted-foreground text-lg mb-8 max-w-xl mx-auto"
               >
-                Download or preview my professional resume to learn more about my
-                experience, skills, and achievements
+                {resume.description || "Download or preview my latest resume PDF to explore my experience."}
               </motion.p>
 
               <motion.div
@@ -74,43 +84,21 @@ const Resume = () => {
                 <Button
                   onClick={handleDownload}
                   size="lg"
-                  className="bg-primary hover:bg-primary/90 glow-primary group"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground glow-primary group transition-all duration-300"
                 >
                   <Download className="mr-2 group-hover:scale-110 transition-transform" />
-                  Download Resume
+                  Download PDF
                 </Button>
 
                 <Button
                   onClick={handlePreview}
                   size="lg"
                   variant="outline"
-                  className="border-primary/50 hover:bg-primary/10 group"
+                  className="border-primary/50 hover:bg-primary/10 group transition-all duration-300 text-white"
                 >
-                  <Eye className="mr-2 group-hover:scale-110 transition-transform" />
-                  Preview Resume
+                  <Eye className="mr-2 group-hover:scale-110 transition-transform text-primary" />
+                  Preview Document
                 </Button>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.7 }}
-                className="mt-12 pt-8 border-t border-border/50"
-              >
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-                  <div className="p-4 rounded-xl bg-background/50">
-                    <div className="text-2xl font-bold gradient-text mb-1">PDF</div>
-                    <div className="text-sm text-muted-foreground">Format</div>
-                  </div>
-                  <div className="p-4 rounded-xl bg-background/50">
-                    <div className="text-2xl font-bold gradient-text mb-1">1 Pages</div>
-                    <div className="text-sm text-muted-foreground">Length</div>
-                  </div>
-                  <div className="p-4 rounded-xl bg-background/50">
-                    <div className="text-2xl font-bold gradient-text mb-1">Updated</div>
-                    <div className="text-sm text-muted-foreground">This Month</div>
-                  </div>
-                </div>
               </motion.div>
             </motion.div>
           </div>

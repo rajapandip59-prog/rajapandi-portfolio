@@ -4,10 +4,11 @@ import { FloatingShape } from "@/components/FloatingShape";
 import { ArrowRight, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import profilePhoto from "@/assets/profile-photo.jpeg";
+import { usePortfolioData } from "@/context/PortfolioDataContext";
 
 const Hero = () => {
   const navigate = useNavigate();
+  const { profile } = usePortfolioData();
 
   return (
     <div className="min-h-screen relative overflow-hidden flex items-center justify-center">
@@ -42,8 +43,8 @@ const Hero = () => {
                 <div className="absolute -inset-4 bg-primary/40 rounded-full blur-2xl opacity-75 group-hover:opacity-100 animate-glow-pulse" />
                 <div className="relative w-56 h-56 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-primary/50 glow-primary">
                   <img
-                    src={profilePhoto}
-                    alt="Professional profile"
+                    src={profile.profilePhoto}
+                    alt={profile.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -57,19 +58,22 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
-                  <span className="gradient-text">AI/ML Engineer </span>
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
+                  <span className="text-white">Hi, I'm </span>
+                  <span className="gradient-text">{profile.name}</span>
                 </h1>
+                <h2 className="text-2xl md:text-3xl font-semibold text-slate-300 mb-6">
+                  {profile.title}
+                </h2>
               </motion.div>
 
               <motion.p
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-xl md:text-2xl text-muted-foreground mb-8"
+                className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl"
               >
-                Building intelligent systems using Machine Learning,
-                Deep Learning, and Data Analytics to solve real-world problems.
+                {profile.heroDescription || profile.bio}
               </motion.p>
 
               <motion.div
@@ -91,9 +95,9 @@ const Hero = () => {
                   onClick={() => navigate("/resume")}
                   size="lg"
                   variant="outline"
-                  className="border-primary/50 hover:bg-primary/10 group transition-all duration-300"
+                  className="border-primary/50 hover:bg-primary/10 group transition-all duration-300 text-white"
                 >
-                  <Download className="mr-2 group-hover:scale-110 transition-transform" />
+                  <Download className="mr-2 group-hover:scale-110 transition-transform text-primary" />
                   Download Resume
                 </Button>
               </motion.div>
@@ -107,17 +111,17 @@ const Hero = () => {
             className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8"
           >
             {[
-              { label: "Projects", value: "5+" },
-              { label: "Clients", value: "3+" },
-              { label: "Awards", value: "15+" },
-              { label: "Experience", value: "1 Years" },
+              { label: "Projects", value: profile.stats.projects },
+              { label: "Clients", value: profile.stats.clients },
+              { label: "Awards", value: profile.stats.awards },
+              { label: "Experience", value: profile.stats.experience },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
-                className="glass p-6 rounded-xl"
+                className="glass p-6 rounded-xl text-center"
               >
                 <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">
                   {stat.value}

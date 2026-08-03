@@ -3,73 +3,30 @@ import { PageTransition } from "@/components/PageTransition";
 import { ParticleBackground } from "@/components/ParticleBackground";
 import { Award, Calendar, ExternalLink, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { usePortfolioData } from "@/context/PortfolioDataContext";
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
   DialogTrigger,
-  DialogClose,
   DialogTitle,
 } from "@/components/ui/dialog";
 
 const Certificate = () => {
-  const certificates = [
-    {
-      title: "Oracle Cloud Infrastructure 2023 AI Certified Foundations",
-      issuer: "Oracle ",
-      date: "2024-05-16",
-      image: "https://drive.google.com/uc?export=view&id=1digs3-bAPHucQpwthJ-NFTaZnO5NKlPq",
-      credentialUrl: "/certificates/Oracle certificate.pdf",
-      gradient: "bg-primary",
-    },
-    {
-      title: "AWS Blockchain Node Runner For BNB Chain",
-      issuer: "Binance & AWS",
-      date: "2025-09-13",
-      image: "https://drive.google.com/uc?export=view&id=1digs3-bAPHucQpwthJ-NFTaZnO5NKlPq",
-      credentialUrl: "/certificates/Binance certificate.pdf",
-      gradient: "bg-secondary",
-    },
-    {
-      title: "AWS Certified Solutions Architect",
-      issuer: "Amazon Web Services",
-      date: "2023-09-10",
-      image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&q=80&w=1000",
-      credentialUrl: "/certificates/Rajapandi NM Certificate.pdf",
-      gradient: "bg-accent",
-    },
-    {
-      title: "Effective sales and marketing strategies for Entrepreneurs/ Startups",
-      issuer: "Vel Tech",
-      date: "2024-11-22",
-      image: "https://drive.google.com/file/d/1dNtJnfqK9QngneXI820_cLJVvB1-R73y/view?usp=sharing",
-      credentialUrl: "/certificates/Vel Tech certificate.pdf",
-      gradient: "bg-primary",
-    },
-    {
-      title: "Continuous Integration and Delivery - DevOps",
-      issuer: "Infosys",
-      date: "2025-10-08",
-      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=1000",
-      credentialUrl: "/certificates/Rajapandi NM Certificate.pdf",
-      gradient: "bg-secondary",
-    },
-    {
-      title: "ChtaGPT & AI Tools Workshop",
-      issuer: "ChatGPT",
-      date: "2024-03-30",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
-      credentialUrl: "/certificates/Chat gpt certificate.pdf",
-      gradient: "bg-accent",
-    },
-  ];
+  const { certificates } = usePortfolioData();
+  const [selectedCert, setSelectedCert] = useState<any | null>(null);
+
+  const sortedCertificates = [...certificates].sort(
+    (a, b) => (a.order || 0) - (b.order || 0)
+  );
 
   return (
     <PageTransition>
       <div className="min-h-screen relative overflow-hidden pt-24 pb-16">
         <ParticleBackground />
 
-        <div className="absolute top-20 right-20 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-40 left-20 w-96 h-96 bg-accent/20 rounded-full blur-[120px] animate-pulse delay-700" />
+        <div className="absolute top-20 left-20 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-secondary/20 rounded-full blur-[120px] animate-pulse delay-500" />
 
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
@@ -79,87 +36,98 @@ const Certificate = () => {
             className="text-center mb-16"
           >
             <h1 className="text-5xl md:text-6xl font-bold mb-6 gradient-text">
-              Certifications
+              Certificates & Achievements
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Professional certifications and achievements in my career journey
+              Professional certifications and recognized credentials
             </p>
           </motion.div>
 
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {certificates.map((cert, index) => (
-              <Dialog key={cert.title}>
-                <DialogTrigger asChild>
-                  <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="glass rounded-2xl overflow-hidden hover:glow-primary transition-all duration-300 group cursor-pointer h-full flex flex-col"
-                  >
-                    <div className={`h-48 ${cert.gradient} relative overflow-hidden`}>
-                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
-                      <img
-                        src={cert.image}
-                        alt={cert.title}
-                        className="w-full h-full object-cover mix-blend-overlay opacity-50 group-hover:scale-110 transition-transform duration-500"
-                      />
-                      <div className="absolute top-4 left-4">
-                        <span className="px-3 py-1 bg-background/80 backdrop-blur-sm rounded-full text-xs font-medium flex items-center gap-1">
-                          <Award className="w-3 h-3" />
-                          {cert.issuer}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="p-6 flex-1 flex flex-col">
-                      <h3 className="text-xl font-bold mb-3 gradient-text group-hover:scale-105 transition-transform">
-                        {cert.title}
-                      </h3>
-
-                      <div className="mt-auto">
-                        <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="w-3 h-3" />
-                            <span>{new Date(cert.date).toLocaleDateString()}</span>
-                          </div>
-                        </div>
-
-                        <Button asChild variant="outline" className="w-full group/btn">
-                          <a
-                            href={cert.credentialUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            View Certificate
-                            <ExternalLink className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                          </a>
-                        </Button>
-                      </div>
-                    </div>
-                  </motion.div>
-                </DialogTrigger>
-                <DialogContent className="max-w-4xl w-[90vw] p-0 overflow-hidden bg-background/95 backdrop-blur-xl border-white/10">
-                  <div className="relative w-full aspect-video">
-                    <DialogTitle className="sr-only">Certificate: {cert.title}</DialogTitle>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {sortedCertificates.map((cert, index) => (
+              <motion.div
+                key={cert.id}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -8 }}
+                className="glass rounded-2xl overflow-hidden hover:glow-primary transition-all duration-300 group flex flex-col justify-between"
+              >
+                <div>
+                  <div className="relative aspect-video overflow-hidden bg-slate-950">
                     <img
                       src={cert.image}
                       alt={cert.title}
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute bottom-0 left-0 right-0 p-6 bg-black/70 text-white">
-                      <h3 className="text-2xl font-bold mb-2">{cert.title}</h3>
-                      <p className="text-white/80">Issued by {cert.issuer} on {new Date(cert.date).toLocaleDateString()}</p>
+                    <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-slate-900/80 text-primary text-xs font-semibold backdrop-blur-md flex items-center gap-1">
+                      <Calendar className="w-3 h-3" /> {cert.date}
                     </div>
-                    <DialogClose className="absolute top-4 right-4 p-2 bg-black/50 hover:bg-black/70 rounded-full text-white transition-colors">
-                      <X className="w-5 h-5" />
-                    </DialogClose>
                   </div>
-                </DialogContent>
-              </Dialog>
+
+                  <div className="p-6">
+                    <div className="flex items-center gap-2 text-primary text-xs font-semibold mb-2">
+                      <Award className="w-4 h-4" /> {cert.issuer}
+                    </div>
+                    <h3 className="text-xl font-bold mb-2 group-hover:gradient-text transition-all">
+                      {cert.title}
+                    </h3>
+                    {cert.credentialId && (
+                      <p className="text-xs text-slate-400 font-mono mb-4">
+                        Credential ID: {cert.credentialId}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="p-6 pt-0">
+                  {cert.credentialUrl && (
+                    <Button
+                      onClick={() => setSelectedCert(cert)}
+                      size="sm"
+                      className="w-full bg-primary hover:bg-primary/90 text-xs text-white"
+                    >
+                      <ExternalLink className="mr-2 h-4 w-4" /> View Credential
+                    </Button>
+                  )}
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </div>
+
+      {/* Certificate Lightbox / PDF Viewer Modal */}
+      <Dialog open={Boolean(selectedCert)} onOpenChange={() => setSelectedCert(null)}>
+        <DialogContent className="bg-slate-950 border-slate-800 text-white max-w-4xl max-h-[90vh] p-4 flex flex-col">
+          <DialogTitle className="text-lg font-bold text-white mb-2">
+            {selectedCert?.title}
+          </DialogTitle>
+
+          {selectedCert?.credentialUrl?.endsWith(".pdf") || selectedCert?.image?.endsWith(".pdf") ? (
+            <iframe
+              src={selectedCert?.credentialUrl || selectedCert?.image}
+              className="w-full h-[70vh] rounded-lg border border-slate-800"
+              title="Certificate PDF"
+            />
+          ) : (
+            <img
+              src={selectedCert?.image || selectedCert?.credentialUrl}
+              alt={selectedCert?.title}
+              className="w-full h-auto max-h-[75vh] object-contain rounded-lg"
+            />
+          )}
+
+          <div className="flex justify-end gap-3 mt-4">
+            <Button
+              onClick={() => window.open(selectedCert?.credentialUrl || selectedCert?.image, "_blank")}
+              className="bg-primary text-white text-xs"
+            >
+              Open Original Link <ExternalLink className="w-3.5 h-3.5 ml-1" />
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </PageTransition>
   );
 };
