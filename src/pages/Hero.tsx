@@ -41,7 +41,7 @@ const Hero = () => {
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <div className="absolute -inset-4 bg-primary/40 rounded-full blur-2xl opacity-75 group-hover:opacity-100 animate-glow-pulse" />
-                <div className="relative w-56 h-56 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-primary/50 glow-primary">
+                <div className="relative w-72 h-72 md:w-96 md:h-96 lg:w-[420px] lg:h-[420px] rounded-full overflow-hidden border-4 border-primary/50 glow-primary">
                   <img
                     src={profile.profilePhoto}
                     alt={profile.name}
