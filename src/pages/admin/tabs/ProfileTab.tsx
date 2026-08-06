@@ -46,13 +46,51 @@ export const ProfileTab: React.FC = () => {
 
       {/* Profile & Cover Images */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-900/60 p-6 rounded-2xl border border-slate-800">
-        <div>
+        <div className="space-y-4">
           <ImageUploader
             label="Profile Photo (Hero & About)"
             value={formData.profilePhoto}
             onChange={(url) => setFormData({ ...formData, profilePhoto: url })}
           />
+          
+          <div className="bg-slate-950 p-4 rounded-xl border border-slate-800">
+            <label className="block text-xs font-semibold text-slate-200 mb-2">
+              🎯 Photo Alignment & Head Adjust (Focus Point)
+            </label>
+            <div className="flex flex-wrap gap-2 mb-3">
+              {[
+                { label: "👤 Top / Head Focus (15%)", val: "center 15%" },
+                { label: "⬆️ Top Edge", val: "center top" },
+                { label: "↕️ Upper Chest (30%)", val: "center 30%" },
+                { label: "⏺️ Center", val: "center center" },
+              ].map((pos) => (
+                <button
+                  key={pos.val}
+                  type="button"
+                  onClick={() => setFormData({ ...formData, photoPosition: pos.val })}
+                  className={`text-xs px-3 py-1.5 rounded-lg border transition-all ${
+                    (formData.photoPosition || "center 15%") === pos.val
+                      ? "bg-primary border-primary text-white font-medium"
+                      : "bg-slate-900 border-slate-700 text-slate-300 hover:border-slate-500"
+                  }`}
+                >
+                  {pos.label}
+                </button>
+              ))}
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-slate-400">Custom Position:</span>
+              <Input
+                value={formData.photoPosition || "center 15%"}
+                onChange={(e) => setFormData({ ...formData, photoPosition: e.target.value })}
+                placeholder="e.g. center 15% or center top"
+                className="bg-slate-900 border-slate-700 text-xs text-white h-8 max-w-[200px]"
+              />
+            </div>
+          </div>
         </div>
+
         <div>
           <ImageUploader
             label="Cover / Background Image"

@@ -5,6 +5,7 @@ export interface Profile {
   bio: string;
   heroDescription: string;
   profilePhoto: string;
+  photoPosition?: string;
   coverImage: string;
   location: string;
   email: string;

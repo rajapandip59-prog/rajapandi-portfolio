@@ -46,6 +46,7 @@ const Hero = () => {
                     src={profile.profilePhoto}
                     alt={profile.name}
                     className="w-full h-full object-cover"
+                    style={{ objectPosition: profile.photoPosition || "center 15%" }}
                   />
                 </div>
               </motion.div>

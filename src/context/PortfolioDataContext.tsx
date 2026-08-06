@@ -28,6 +28,7 @@ const defaultProfile: Profile = {
   bio: "I'm an AI Engineer & Data Scientist crafting intelligent systems using Machine Learning, Deep Learning, and Data Analytics to solve real-world problems.",
   heroDescription: "Building intelligent systems using Machine Learning, Deep Learning, and Data Analytics to solve real-world problems.",
   profilePhoto: profilePhoto,
+  photoPosition: "center 15%",
   coverImage: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1200",
   location: "Theni, India",
   email: "rajapandip59@gmail.com",
