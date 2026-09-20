@@ -35,9 +35,9 @@ const Certificate = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 gradient-text">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 gradient-text">
               Certificates & Achievements
-            </h1>
+            </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Professional certifications and recognized credentials
             </p>
@@ -57,7 +57,7 @@ const Certificate = () => {
                   <div className="relative aspect-video overflow-hidden bg-slate-950">
                     <img
                       src={cert.image}
-                      alt={cert.title}
+                      alt={`Rajapandi P Certificate - ${cert.title}`}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-slate-900/80 text-primary text-xs font-semibold backdrop-blur-md flex items-center gap-1">
@@ -113,7 +113,7 @@ const Certificate = () => {
           ) : (
             <img
               src={selectedCert?.image || selectedCert?.credentialUrl}
-              alt={selectedCert?.title}
+              alt={`Rajapandi P Certificate - ${selectedCert?.title || 'Certificate Preview'}`}
               className="w-full h-auto max-h-[75vh] object-contain rounded-lg"
             />
           )}

@@ -26,9 +26,9 @@ const ExperiencePage = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 gradient-text">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 gradient-text">
               Work Experience
-            </h1>
+            </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               My professional journey, internships, and hands-on industry experience
             </p>

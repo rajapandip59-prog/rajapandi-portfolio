@@ -44,7 +44,7 @@ const Hero = () => {
                 <div className="relative w-72 h-72 md:w-96 md:h-96 lg:w-[420px] lg:h-[420px] rounded-full overflow-hidden border-4 border-primary/50 glow-primary">
                   <img
                     src={profile.profilePhoto}
-                    alt={profile.name}
+                    alt={`${profile.name} - AI & Software Developer Profile Photo`}
                     className="w-full h-full object-cover"
                     style={{ objectPosition: profile.photoPosition || "center 15%" }}
                   />

@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { Navigation } from "@/components/Navigation";
+import { SEO } from "@/components/SEO";
 import Home from "./pages/Home";
 import Resume from "./pages/Resume";
 import CallToAction from "./pages/CallToAction";
@@ -25,6 +26,7 @@ const Layout = () => {
 
   return (
     <div className="relative min-h-screen">
+      <SEO />
       {!isAdminRoute && <Navigation />}
       <AnimatePresence mode="wait">
         <Routes>

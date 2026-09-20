@@ -37,9 +37,9 @@ const Social = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 gradient-text">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 gradient-text">
               Connect With Me
-            </h1>
+            </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Follow my journey, check out my work, or get in touch across various platforms
             </p>

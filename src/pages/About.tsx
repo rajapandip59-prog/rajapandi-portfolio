@@ -42,7 +42,7 @@ const About = () => {
                   <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-primary/50 glow-primary">
                     <img
                       src={profile.profilePhoto}
-                      alt={profile.name}
+                      alt={`${profile.name} - About Me Profile Photo`}
                       className="w-full h-full object-cover"
                       style={{ objectPosition: profile.photoPosition || "center 15%" }}
                     />
@@ -51,9 +51,9 @@ const About = () => {
               </motion.div>
 
               <div className="flex-1 text-center md:text-left">
-                <h1 className="text-5xl md:text-6xl font-bold mb-6 gradient-text">
+                <h2 className="text-5xl md:text-6xl font-bold mb-6 gradient-text">
                   About Me
-                </h1>
+                </h2>
                 <p className="text-xl text-muted-foreground leading-relaxed">
                   {about.aboutText || profile.bio}
                 </p>
@@ -67,7 +67,7 @@ const About = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="max-w-3xl mx-auto glass p-8 rounded-2xl mb-16"
           >
-            <h2 className="text-3xl font-bold mb-4 gradient-text">My Journey</h2>
+            <h3 className="text-3xl font-bold mb-4 gradient-text">My Journey</h3>
             <p className="text-muted-foreground leading-relaxed mb-4">
               {about.journeyText1}
             </p>
@@ -91,9 +91,9 @@ const About = () => {
                     <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                       <Icon className="w-8 h-8 text-primary" />
                     </div>
-                    <h3 className="text-2xl font-bold mb-2 gradient-text">
+                    <h4 className="text-2xl font-bold mb-2 gradient-text">
                       {achievement.title}
-                    </h3>
+                    </h4>
                     <p className="text-sm text-muted-foreground">
                       {achievement.description}
                     </p>

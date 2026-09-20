@@ -258,10 +258,10 @@ const defaultMessages: Message[] = [
 ];
 
 const defaultSEO: SEOSettings = {
-  metaTitle: "Rajapandi P | AI/ML Engineer & Data Scientist Portfolio",
-  metaDescription: "Official portfolio of Rajapandi P, AI/ML Engineer specializing in Machine Learning, Deep Learning, and Data Analytics.",
-  keywords: "AI Engineer, Machine Learning, Data Science, Deep Learning, React, Python, Portfolio, Rajapandi P",
-  ogImage: profilePhoto,
+  metaTitle: "Rajapandi P | AI & Software Developer Portfolio",
+  metaDescription: "Official portfolio of Rajapandi P, AI & Software Developer specializing in Machine Learning, Computer Vision, Deep Learning, and Full Stack Web Development.",
+  keywords: "Rajapandi P, Rajapandi, AI Developer, Software Developer, Machine Learning, Computer Vision, Deep Learning, Data Scientist, Full Stack Developer, React, Python",
+  ogImage: "https://rajapandi.vercel.app/og-image.png",
   twitterHandle: "@RajapandiP70029",
 };
 

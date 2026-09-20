@@ -59,9 +59,9 @@ const Skills = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 gradient-text">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 gradient-text">
               Skills & Expertise
-            </h1>
+            </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               A comprehensive toolkit of technologies and methodologies I use to bring ideas to life
             </p>

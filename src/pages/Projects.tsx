@@ -28,9 +28,9 @@ const Projects = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 gradient-text">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 gradient-text">
               Featured Projects
-            </h1>
+            </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               A collection of projects showcasing my technical skills and problem-solving abilities
             </p>
@@ -50,7 +50,7 @@ const Projects = () => {
                   <div className="relative aspect-video overflow-hidden bg-slate-950">
                     <img
                       src={project.image}
-                      alt={project.title}
+                      alt={`Rajapandi P Project - ${project.title}`}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     {project.isFeatured && (
