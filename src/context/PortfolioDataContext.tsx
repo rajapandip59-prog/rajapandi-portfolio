@@ -299,7 +299,7 @@ const SINGLETON_UUIDS = {
 };
 
 // Helper: Read synchronously from LocalStorage with safe fallback
-const getStoredItem = <T>(key: string, fallback: T): T => {
+function getStoredItem<T>(key: string, fallback: T): T {
   if (typeof window === "undefined") return fallback;
   try {
     const raw = localStorage.getItem(key);
