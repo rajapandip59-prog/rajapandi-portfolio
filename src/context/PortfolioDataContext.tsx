@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import {
   Profile,
   AboutData,
@@ -21,7 +21,7 @@ import profilePhoto from "@/assets/profile-photo.jpeg";
 import portfolioCover from "@/assets/portfolio-project-cover.png";
 
 // Default Portfolio Data Seed
-const defaultProfile: Profile = {
+export const defaultProfile: Profile = {
   name: "Rajapandi P",
   title: "AI/ML Engineer & Data Scientist",
   tagline: "Building intelligent systems that think, learn, and evolve",
@@ -42,7 +42,7 @@ const defaultProfile: Profile = {
   },
 };
 
-const defaultAbout: AboutData = {
+export const defaultAbout: AboutData = {
   aboutText: "I'm an AI Engineer & Data Scientist crafting intelligent systems that think, learn, and evolve. I specialize in Machine Learning, Deep Learning, and building futuristic, scalable AI solutions.",
   journeyText1: "My journey into AI began with a curiosity to understand how machines can think and make decisions using data. As a fresher, I focused on building a strong foundation in Machine Learning, Deep Learning, and data-driven problem solving through continuous learning and practice.",
   journeyText2: "I enjoy working on real-world projects where I convert ideas into practical AI solutions using code and data. Currently, I'm improving my skills by experimenting with new AI technologies and preparing myself for industry-level challenges.",
@@ -54,7 +54,7 @@ const defaultAbout: AboutData = {
   ],
 };
 
-const defaultSkills: Skill[] = [
+export const defaultSkills: Skill[] = [
   { id: "1", name: "Python", level: 98, category: "Languages", iconName: "Code", order: 1 },
   { id: "2", name: "React/Next.js", level: 95, category: "Frontend", iconName: "Atom", order: 2 },
   { id: "3", name: "TypeScript", level: 90, category: "Languages", iconName: "Braces", order: 3 },
@@ -71,7 +71,7 @@ const defaultSkills: Skill[] = [
   { id: "14", name: "Framer Motion", level: 92, category: "3D/Animation", iconName: "Sparkles", order: 14 },
 ];
 
-const defaultExperiences: Experience[] = [
+export const defaultExperiences: Experience[] = [
   {
     id: "exp-1",
     company: "AI Tech Solutions",
@@ -90,7 +90,7 @@ const defaultExperiences: Experience[] = [
   },
 ];
 
-const defaultEducation: Education[] = [
+export const defaultEducation: Education[] = [
   {
     id: "edu-1",
     institution: "Christ The King Engineering College",
@@ -104,7 +104,7 @@ const defaultEducation: Education[] = [
   },
 ];
 
-const defaultProjects: Project[] = [
+export const defaultProjects: Project[] = [
   {
     id: "proj-1",
     title: "Portfolio CMS",
@@ -163,7 +163,7 @@ const defaultProjects: Project[] = [
   },
 ];
 
-const defaultCertificates: Certificate[] = [
+export const defaultCertificates: Certificate[] = [
   {
     id: "cert-1",
     title: "Oracle Cloud Infrastructure 2023 AI Certified Foundations",
@@ -199,7 +199,7 @@ const defaultCertificates: Certificate[] = [
   },
 ];
 
-const defaultGallery: GalleryItem[] = [
+export const defaultGallery: GalleryItem[] = [
   {
     id: "gal-1",
     title: "AI Workshop Keynote",
@@ -220,7 +220,7 @@ const defaultGallery: GalleryItem[] = [
   },
 ];
 
-const defaultResume: ResumeData = {
+export const defaultResume: ResumeData = {
   fileUrl: "/resume.pdf",
   fileName: "Rajapandi_P_Resume.pdf",
   lastUpdated: new Date().toISOString().split("T")[0],
@@ -228,7 +228,7 @@ const defaultResume: ResumeData = {
   description: "Comprehensive resume highlighting skills in Artificial Intelligence, Machine Learning, Deep Learning, and Full-Stack Development.",
 };
 
-const defaultContactInfo: ContactInfo = {
+export const defaultContactInfo: ContactInfo = {
   email: "rajapandip59@gmail.com",
   phone: "+91 9360410920",
   address: "Theni, Tamil Nadu, India",
@@ -236,7 +236,7 @@ const defaultContactInfo: ContactInfo = {
   businessHours: "Mon - Fri: 9:00 AM - 6:00 PM IST",
 };
 
-const defaultSocialLinks: SocialLink[] = [
+export const defaultSocialLinks: SocialLink[] = [
   { id: "soc-1", name: "GitHub", iconName: "Github", username: "@rajapandip59-prog", subtext: "10K+ followers", gradient: "bg-zinc-900", url: "https://github.com/rajapandip59-prog", order: 1 },
   { id: "soc-2", name: "LinkedIn", iconName: "Linkedin", username: "@rajapandi-p", subtext: "100+ connections", gradient: "bg-blue-700", url: "https://www.linkedin.com/in/rajapandi-p/", order: 2 },
   { id: "soc-3", name: "X", iconName: "X", username: "@RajapandiP70029", subtext: "8K+ followers", gradient: "bg-sky-500", url: "https://twitter.com/RajapandiP70029", order: 3 },
@@ -245,7 +245,7 @@ const defaultSocialLinks: SocialLink[] = [
   { id: "soc-6", name: "Email", iconName: "Mail", username: "rajapandip59@gmail.com", subtext: "Always available", gradient: "bg-teal-600", url: "mailto:rajapandip59@gmail.com", order: 6 },
 ];
 
-const defaultMessages: Message[] = [
+export const defaultMessages: Message[] = [
   {
     id: "msg-1",
     name: "Alex Johnson",
@@ -257,7 +257,7 @@ const defaultMessages: Message[] = [
   },
 ];
 
-const defaultSEO: SEOSettings = {
+export const defaultSEO: SEOSettings = {
   metaTitle: "Rajapandi P | AI & Software Developer Portfolio",
   metaDescription: "Official portfolio of Rajapandi P, AI & Software Developer specializing in Machine Learning, Computer Vision, Deep Learning, and Full Stack Web Development.",
   keywords: "Rajapandi P, Rajapandi, AI Developer, Software Developer, Machine Learning, Computer Vision, Deep Learning, Data Scientist, Full Stack Developer, React, Python",
@@ -265,11 +265,51 @@ const defaultSEO: SEOSettings = {
   twitterHandle: "@RajapandiP70029",
 };
 
-const defaultSettings: Settings = {
+export const defaultSettings: Settings = {
   adminEmail: "rajapandip59@gmail.com",
   siteName: "Rajapandi P Portfolio",
   theme: "dark",
   lastBackupDate: new Date().toISOString().split("T")[0],
+};
+
+export const STORAGE_KEYS = {
+  PROFILE: "cms_profile",
+  ABOUT: "cms_about",
+  SKILLS: "cms_skills",
+  EXPERIENCES: "cms_experiences",
+  EDUCATION: "cms_education",
+  PROJECTS: "cms_projects",
+  CERTIFICATES: "cms_certificates",
+  GALLERY: "cms_gallery",
+  RESUME: "cms_resume",
+  CONTACT: "cms_contact",
+  SOCIAL: "cms_social",
+  MESSAGES: "cms_messages",
+  SEO: "cms_seo",
+  SETTINGS: "cms_settings",
+};
+
+// Singleton UUIDs for Supabase single-row tables (profiles, about_data, etc.)
+const SINGLETON_UUIDS = {
+  PROFILE: "00000000-0000-0000-0000-000000000001",
+  ABOUT: "00000000-0000-0000-0000-000000000002",
+  CONTACT: "00000000-0000-0000-0000-000000000003",
+  SEO: "00000000-0000-0000-0000-000000000004",
+  RESUME: "00000000-0000-0000-0000-000000000005",
+};
+
+// Helper: Read synchronously from LocalStorage with safe fallback
+const getStoredItem = <T>(key: string, fallback: T): T => {
+  if (typeof window === "undefined") return fallback;
+  try {
+    const raw = localStorage.getItem(key);
+    if (!raw) return fallback;
+    const parsed = JSON.parse(raw);
+    return parsed !== null && parsed !== undefined ? parsed : fallback;
+  } catch (err) {
+    console.warn(`Error reading ${key} from localStorage:`, err);
+    return fallback;
+  }
 };
 
 interface PortfolioDataContextType {
@@ -337,129 +377,300 @@ interface PortfolioDataContextType {
 
 const PortfolioDataContext = createContext<PortfolioDataContextType | undefined>(undefined);
 
-const STORAGE_KEYS = {
-  PROFILE: "cms_profile",
-  ABOUT: "cms_about",
-  SKILLS: "cms_skills",
-  EXPERIENCES: "cms_experiences",
-  EDUCATION: "cms_education",
-  PROJECTS: "cms_projects",
-  CERTIFICATES: "cms_certificates",
-  GALLERY: "cms_gallery",
-  RESUME: "cms_resume",
-  CONTACT: "cms_contact",
-  SOCIAL: "cms_social",
-  MESSAGES: "cms_messages",
-  SEO: "cms_seo",
-  SETTINGS: "cms_settings",
-};
-
 export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [profile, setProfile] = useState<Profile>(defaultProfile);
-  const [about, setAbout] = useState<AboutData>(defaultAbout);
-  const [skills, setSkills] = useState<Skill[]>(defaultSkills);
-  const [experiences, setExperiences] = useState<Experience[]>(defaultExperiences);
-  const [education, setEducation] = useState<Education[]>(defaultEducation);
-  const [projects, setProjects] = useState<Project[]>(defaultProjects);
-  const [certificates, setCertificates] = useState<Certificate[]>(defaultCertificates);
-  const [gallery, setGallery] = useState<GalleryItem[]>(defaultGallery);
-  const [resume, setResume] = useState<ResumeData>(defaultResume);
-  const [contactInfo, setContactInfo] = useState<ContactInfo>(defaultContactInfo);
-  const [socialLinks, setSocialLinks] = useState<SocialLink[]>(defaultSocialLinks);
-  const [messages, setMessages] = useState<Message[]>(defaultMessages);
-  const [seoSettings, setSeoSettings] = useState<SEOSettings>(defaultSEO);
-  const [settings, setSettings] = useState<Settings>(defaultSettings);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  // Synchronous initial state: immediately read user changes from localStorage if available
+  const [profile, setProfile] = useState<Profile>(() => getStoredItem(STORAGE_KEYS.PROFILE, defaultProfile));
+  const [about, setAbout] = useState<AboutData>(() => getStoredItem(STORAGE_KEYS.ABOUT, defaultAbout));
+  const [skills, setSkills] = useState<Skill[]>(() => getStoredItem(STORAGE_KEYS.SKILLS, defaultSkills));
+  const [experiences, setExperiences] = useState<Experience[]>(() => getStoredItem(STORAGE_KEYS.EXPERIENCES, defaultExperiences));
+  const [education, setEducation] = useState<Education[]>(() => getStoredItem(STORAGE_KEYS.EDUCATION, defaultEducation));
+  const [projects, setProjects] = useState<Project[]>(() => getStoredItem(STORAGE_KEYS.PROJECTS, defaultProjects));
+  const [certificates, setCertificates] = useState<Certificate[]>(() => getStoredItem(STORAGE_KEYS.CERTIFICATES, defaultCertificates));
+  const [gallery, setGallery] = useState<GalleryItem[]>(() => getStoredItem(STORAGE_KEYS.GALLERY, defaultGallery));
+  const [resume, setResume] = useState<ResumeData>(() => getStoredItem(STORAGE_KEYS.RESUME, defaultResume));
+  const [contactInfo, setContactInfo] = useState<ContactInfo>(() => getStoredItem(STORAGE_KEYS.CONTACT, defaultContactInfo));
+  const [socialLinks, setSocialLinks] = useState<SocialLink[]>(() => getStoredItem(STORAGE_KEYS.SOCIAL, defaultSocialLinks));
+  const [messages, setMessages] = useState<Message[]>(() => getStoredItem(STORAGE_KEYS.MESSAGES, defaultMessages));
+  const [seoSettings, setSeoSettings] = useState<SEOSettings>(() => getStoredItem(STORAGE_KEYS.SEO, defaultSEO));
+  const [settings, setSettings] = useState<Settings>(() => getStoredItem(STORAGE_KEYS.SETTINGS, defaultSettings));
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  // Load Initial Data from LocalStorage or Supabase
+  // 1. Cross-tab real-time live synchronization via browser 'storage' event
   useEffect(() => {
-    const loadInitialData = async () => {
+    const handleStorageChange = (e: StorageEvent) => {
+      if (!e.key || !e.newValue) return;
       try {
-        if (isSupabaseConfigured && supabase) {
-          // Attempt loading from Supabase tables
-          const [profRes, aboutRes, skillsRes, expRes, eduRes, projRes, certRes, galRes, resRes, contactRes, socRes, msgRes, seoRes] = await Promise.all([
-            supabase.from("profiles").select("data").single(),
-            supabase.from("about_data").select("data").single(),
-            supabase.from("skills").select("*").order("sort_order", { ascending: true }),
-            supabase.from("experiences").select("*").order("sort_order", { ascending: true }),
-            supabase.from("education").select("*").order("sort_order", { ascending: true }),
-            supabase.from("projects").select("*").order("sort_order", { ascending: true }),
-            supabase.from("certificates").select("*").order("sort_order", { ascending: true }),
-            supabase.from("gallery").select("*").order("sort_order", { ascending: true }),
-            supabase.from("resume").select("*").single(),
-            supabase.from("contact_info").select("data").single(),
-            supabase.from("social_links").select("*").order("sort_order", { ascending: true }),
-            supabase.from("messages").select("*").order("created_at", { ascending: false }),
-            supabase.from("seo_settings").select("data").single(),
-          ]);
-
-          if (profRes.data?.data) setProfile(profRes.data.data);
-          if (aboutRes.data?.data) setAbout(aboutRes.data.data);
-          if (skillsRes.data?.length) setSkills(skillsRes.data.map(s => ({ id: s.id, name: s.name, level: s.level, category: s.category, iconName: s.icon_name, order: s.sort_order })));
-          if (expRes.data?.length) setExperiences(expRes.data.map(e => ({ id: e.id, company: e.company, role: e.role, location: e.location, startDate: e.start_date, endDate: e.end_date, isCurrent: e.is_current, description: e.description, techStack: e.tech_stack, order: e.sort_order })));
-          if (eduRes.data?.length) setEducation(eduRes.data.map(ed => ({ id: ed.id, institution: ed.institution, degree: ed.degree, fieldOfStudy: ed.field_of_study, startYear: ed.start_year, endYear: ed.end_year, grade: ed.grade, achievements: ed.achievements, order: ed.sort_order })));
-          if (projRes.data?.length) setProjects(projRes.data.map(p => ({ id: p.id, title: p.title, description: p.description, tech: p.tech, gradient: p.gradient, image: p.image, githubUrl: p.github_url, liveUrl: p.live_url, category: p.category, isFeatured: p.is_featured, isVisible: p.is_visible, order: p.sort_order })));
-          if (certRes.data?.length) setCertificates(certRes.data.map(c => ({ id: c.id, title: c.title, issuer: c.issuer, date: c.date, credentialId: c.credential_id, credentialUrl: c.credential_url, image: c.image, gradient: c.gradient, order: c.sort_order })));
-          if (galRes.data?.length) setGallery(galRes.data.map(g => ({ id: g.id, title: g.title, caption: g.caption, imageUrl: g.image_url, category: g.category, dateAdded: g.date_added, order: g.sort_order })));
-          if (resRes.data) setResume({ fileUrl: resRes.data.file_url, fileName: resRes.data.file_name, lastUpdated: resRes.data.last_updated, title: resRes.data.title, description: resRes.data.description });
-          if (contactRes.data?.data) setContactInfo(contactRes.data.data);
-          if (socRes.data?.length) setSocialLinks(socRes.data.map(s => ({ id: s.id, name: s.name, iconName: s.icon_name, username: s.username, subtext: s.subtext, gradient: s.gradient, url: s.url, order: s.sort_order })));
-          if (msgRes.data?.length) setMessages(msgRes.data.map(m => ({ id: m.id, name: m.name, email: m.email, subject: m.subject, message: m.message, createdAt: m.created_at, isRead: m.is_read })));
-          if (seoRes.data?.data) setSeoSettings(seoRes.data.data);
-
-          setIsLoading(false);
-          return;
+        const parsed = JSON.parse(e.newValue);
+        switch (e.key) {
+          case STORAGE_KEYS.PROFILE:
+            setProfile(parsed);
+            break;
+          case STORAGE_KEYS.ABOUT:
+            setAbout(parsed);
+            break;
+          case STORAGE_KEYS.SKILLS:
+            setSkills(parsed);
+            break;
+          case STORAGE_KEYS.EXPERIENCES:
+            setExperiences(parsed);
+            break;
+          case STORAGE_KEYS.EDUCATION:
+            setEducation(parsed);
+            break;
+          case STORAGE_KEYS.PROJECTS:
+            setProjects(parsed);
+            break;
+          case STORAGE_KEYS.CERTIFICATES:
+            setCertificates(parsed);
+            break;
+          case STORAGE_KEYS.GALLERY:
+            setGallery(parsed);
+            break;
+          case STORAGE_KEYS.RESUME:
+            setResume(parsed);
+            break;
+          case STORAGE_KEYS.CONTACT:
+            setContactInfo(parsed);
+            break;
+          case STORAGE_KEYS.SOCIAL:
+            setSocialLinks(parsed);
+            break;
+          case STORAGE_KEYS.MESSAGES:
+            setMessages(parsed);
+            break;
+          case STORAGE_KEYS.SEO:
+            setSeoSettings(parsed);
+            break;
+          case STORAGE_KEYS.SETTINGS:
+            setSettings(parsed);
+            break;
         }
       } catch (err) {
-        console.warn("Supabase fetch failed, loading local fallback data:", err);
+        console.warn("Storage sync parse error:", err);
       }
-
-      // Fallback to LocalStorage
-      try {
-        const p = localStorage.getItem(STORAGE_KEYS.PROFILE);
-        if (p) setProfile(JSON.parse(p));
-        const a = localStorage.getItem(STORAGE_KEYS.ABOUT);
-        if (a) setAbout(JSON.parse(a));
-        const sk = localStorage.getItem(STORAGE_KEYS.SKILLS);
-        if (sk) setSkills(JSON.parse(sk));
-        const ex = localStorage.getItem(STORAGE_KEYS.EXPERIENCES);
-        if (ex) setExperiences(JSON.parse(ex));
-        const ed = localStorage.getItem(STORAGE_KEYS.EDUCATION);
-        if (ed) setEducation(JSON.parse(ed));
-        const pr = localStorage.getItem(STORAGE_KEYS.PROJECTS);
-        if (pr) setProjects(JSON.parse(pr));
-        const ce = localStorage.getItem(STORAGE_KEYS.CERTIFICATES);
-        if (ce) setCertificates(JSON.parse(ce));
-        const ga = localStorage.getItem(STORAGE_KEYS.GALLERY);
-        if (ga) setGallery(JSON.parse(ga));
-        const re = localStorage.getItem(STORAGE_KEYS.RESUME);
-        if (re) setResume(JSON.parse(re));
-        const co = localStorage.getItem(STORAGE_KEYS.CONTACT);
-        if (co) setContactInfo(JSON.parse(co));
-        const so = localStorage.getItem(STORAGE_KEYS.SOCIAL);
-        if (so) setSocialLinks(JSON.parse(so));
-        const me = localStorage.getItem(STORAGE_KEYS.MESSAGES);
-        if (me) setMessages(JSON.parse(me));
-        const se = localStorage.getItem(STORAGE_KEYS.SEO);
-        if (se) setSeoSettings(JSON.parse(se));
-        const st = localStorage.getItem(STORAGE_KEYS.SETTINGS);
-        if (st) setSettings(JSON.parse(st));
-      } catch (e) {
-        console.error("Local storage load error:", e);
-      }
-
-      setIsLoading(false);
     };
 
-    loadInitialData();
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
-  // Update Methods
+  // 2. Background sync from Supabase if configured & tables exist
+  useEffect(() => {
+    const syncFromSupabase = async () => {
+      if (!isSupabaseConfigured || !supabase) return;
+
+      try {
+        const [
+          profRes,
+          aboutRes,
+          skillsRes,
+          expRes,
+          eduRes,
+          projRes,
+          certRes,
+          galRes,
+          resRes,
+          contactRes,
+          socRes,
+          msgRes,
+          seoRes,
+        ] = await Promise.allSettled([
+          supabase.from("profiles").select("data").limit(1).maybeSingle(),
+          supabase.from("about_data").select("data").limit(1).maybeSingle(),
+          supabase.from("skills").select("*").order("sort_order", { ascending: true }),
+          supabase.from("experiences").select("*").order("sort_order", { ascending: true }),
+          supabase.from("education").select("*").order("sort_order", { ascending: true }),
+          supabase.from("projects").select("*").order("sort_order", { ascending: true }),
+          supabase.from("certificates").select("*").order("sort_order", { ascending: true }),
+          supabase.from("gallery").select("*").order("sort_order", { ascending: true }),
+          supabase.from("resume").select("*").limit(1).maybeSingle(),
+          supabase.from("contact_info").select("data").limit(1).maybeSingle(),
+          supabase.from("social_links").select("*").order("sort_order", { ascending: true }),
+          supabase.from("messages").select("*").order("created_at", { ascending: false }),
+          supabase.from("seo_settings").select("data").limit(1).maybeSingle(),
+        ]);
+
+        // Only adopt Supabase values if the table exists, returned data, and has no error
+        if (profRes.status === "fulfilled" && profRes.value.data?.data) {
+          const val = profRes.value.data.data;
+          setProfile(val);
+          localStorage.setItem(STORAGE_KEYS.PROFILE, JSON.stringify(val));
+        }
+
+        if (aboutRes.status === "fulfilled" && aboutRes.value.data?.data) {
+          const val = aboutRes.value.data.data;
+          setAbout(val);
+          localStorage.setItem(STORAGE_KEYS.ABOUT, JSON.stringify(val));
+        }
+
+        if (skillsRes.status === "fulfilled" && Array.isArray(skillsRes.value.data) && skillsRes.value.data.length > 0) {
+          const mapped: Skill[] = skillsRes.value.data.map((s) => ({
+            id: s.id,
+            name: s.name,
+            level: s.level,
+            category: s.category,
+            iconName: s.icon_name,
+            order: s.sort_order,
+          }));
+          setSkills(mapped);
+          localStorage.setItem(STORAGE_KEYS.SKILLS, JSON.stringify(mapped));
+        }
+
+        if (expRes.status === "fulfilled" && Array.isArray(expRes.value.data) && expRes.value.data.length > 0) {
+          const mapped: Experience[] = expRes.value.data.map((e) => ({
+            id: e.id,
+            company: e.company,
+            role: e.role,
+            location: e.location,
+            startDate: e.start_date,
+            endDate: e.end_date,
+            isCurrent: e.is_current,
+            description: Array.isArray(e.description) ? e.description : [],
+            techStack: Array.isArray(e.tech_stack) ? e.tech_stack : [],
+            order: e.sort_order,
+          }));
+          setExperiences(mapped);
+          localStorage.setItem(STORAGE_KEYS.EXPERIENCES, JSON.stringify(mapped));
+        }
+
+        if (eduRes.status === "fulfilled" && Array.isArray(eduRes.value.data) && eduRes.value.data.length > 0) {
+          const mapped: Education[] = eduRes.value.data.map((ed) => ({
+            id: ed.id,
+            institution: ed.institution,
+            degree: ed.degree,
+            fieldOfStudy: ed.field_of_study,
+            startYear: ed.start_year,
+            endYear: ed.end_year,
+            grade: ed.grade,
+            achievements: ed.achievements,
+            order: ed.sort_order,
+          }));
+          setEducation(mapped);
+          localStorage.setItem(STORAGE_KEYS.EDUCATION, JSON.stringify(mapped));
+        }
+
+        if (projRes.status === "fulfilled" && Array.isArray(projRes.value.data) && projRes.value.data.length > 0) {
+          const mapped: Project[] = projRes.value.data.map((p) => ({
+            id: p.id,
+            title: p.title,
+            description: p.description,
+            tech: Array.isArray(p.tech) ? p.tech : [],
+            gradient: p.gradient || "bg-primary",
+            image: p.image,
+            githubUrl: p.github_url,
+            liveUrl: p.live_url,
+            category: p.category,
+            isFeatured: p.is_featured,
+            isVisible: p.is_visible,
+            order: p.sort_order,
+          }));
+          setProjects(mapped);
+          localStorage.setItem(STORAGE_KEYS.PROJECTS, JSON.stringify(mapped));
+        }
+
+        if (certRes.status === "fulfilled" && Array.isArray(certRes.value.data) && certRes.value.data.length > 0) {
+          const mapped: Certificate[] = certRes.value.data.map((c) => ({
+            id: c.id,
+            title: c.title,
+            issuer: c.issuer,
+            date: c.date,
+            credentialId: c.credential_id,
+            credentialUrl: c.credential_url,
+            image: c.image,
+            gradient: c.gradient || "bg-primary",
+            order: c.sort_order,
+          }));
+          setCertificates(mapped);
+          localStorage.setItem(STORAGE_KEYS.CERTIFICATES, JSON.stringify(mapped));
+        }
+
+        if (galRes.status === "fulfilled" && Array.isArray(galRes.value.data) && galRes.value.data.length > 0) {
+          const mapped: GalleryItem[] = galRes.value.data.map((g) => ({
+            id: g.id,
+            title: g.title,
+            caption: g.caption,
+            imageUrl: g.image_url,
+            category: g.category,
+            dateAdded: g.date_added,
+            order: g.sort_order,
+          }));
+          setGallery(mapped);
+          localStorage.setItem(STORAGE_KEYS.GALLERY, JSON.stringify(mapped));
+        }
+
+        if (resRes.status === "fulfilled" && resRes.value.data) {
+          const r = resRes.value.data;
+          const val: ResumeData = {
+            fileUrl: r.file_url,
+            fileName: r.file_name,
+            lastUpdated: r.last_updated,
+            title: r.title,
+            description: r.description,
+          };
+          setResume(val);
+          localStorage.setItem(STORAGE_KEYS.RESUME, JSON.stringify(val));
+        }
+
+        if (contactRes.status === "fulfilled" && contactRes.value.data?.data) {
+          const val = contactRes.value.data.data;
+          setContactInfo(val);
+          localStorage.setItem(STORAGE_KEYS.CONTACT, JSON.stringify(val));
+        }
+
+        if (socRes.status === "fulfilled" && Array.isArray(socRes.value.data) && socRes.value.data.length > 0) {
+          const mapped: SocialLink[] = socRes.value.data.map((s) => ({
+            id: s.id,
+            name: s.name,
+            iconName: s.icon_name,
+            username: s.username,
+            subtext: s.subtext,
+            gradient: s.gradient,
+            url: s.url,
+            order: s.sort_order,
+          }));
+          setSocialLinks(mapped);
+          localStorage.setItem(STORAGE_KEYS.SOCIAL, JSON.stringify(mapped));
+        }
+
+        if (msgRes.status === "fulfilled" && Array.isArray(msgRes.value.data) && msgRes.value.data.length > 0) {
+          const mapped: Message[] = msgRes.value.data.map((m) => ({
+            id: m.id,
+            name: m.name,
+            email: m.email,
+            subject: m.subject,
+            message: m.message,
+            createdAt: m.created_at,
+            isRead: m.is_read,
+          }));
+          setMessages(mapped);
+          localStorage.setItem(STORAGE_KEYS.MESSAGES, JSON.stringify(mapped));
+        }
+
+        if (seoRes.status === "fulfilled" && seoRes.value.data?.data) {
+          const val = seoRes.value.data.data;
+          setSeoSettings(val);
+          localStorage.setItem(STORAGE_KEYS.SEO, JSON.stringify(val));
+        }
+      } catch (err) {
+        console.warn("Supabase background sync completed with note:", err);
+      }
+    };
+
+    syncFromSupabase();
+  }, []);
+
+  // UPDATE METHODS: Immediate LocalStorage guarantee + Safe Supabase Sync
   const updateProfile = async (data: Profile) => {
     setProfile(data);
     localStorage.setItem(STORAGE_KEYS.PROFILE, JSON.stringify(data));
     if (isSupabaseConfigured && supabase) {
-      await supabase.from("profiles").upsert({ id: "default", data, updated_at: new Date().toISOString() });
+      try {
+        await supabase
+          .from("profiles")
+          .upsert({ id: SINGLETON_UUIDS.PROFILE, data, updated_at: new Date().toISOString() });
+      } catch (e) {
+        console.warn("Supabase profile sync warning:", e);
+      }
     }
   };
 
@@ -467,7 +678,13 @@ export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({
     setAbout(data);
     localStorage.setItem(STORAGE_KEYS.ABOUT, JSON.stringify(data));
     if (isSupabaseConfigured && supabase) {
-      await supabase.from("about_data").upsert({ id: "default", data, updated_at: new Date().toISOString() });
+      try {
+        await supabase
+          .from("about_data")
+          .upsert({ id: SINGLETON_UUIDS.ABOUT, data, updated_at: new Date().toISOString() });
+      } catch (e) {
+        console.warn("Supabase about sync warning:", e);
+      }
     }
   };
 
@@ -479,14 +696,19 @@ export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({
       return updated;
     });
     if (isSupabaseConfigured && supabase) {
-      await supabase.from("skills").upsert({
-        id: skill.id,
-        name: skill.name,
-        level: skill.level,
-        category: skill.category,
-        icon_name: skill.iconName,
-        sort_order: skill.order,
-      });
+      try {
+        await supabase.from("skills").upsert({
+          id: skill.id,
+          name: skill.name,
+          level: skill.level,
+          category: skill.category,
+          icon_name: skill.iconName,
+          sort_order: skill.order,
+          updated_at: new Date().toISOString(),
+        });
+      } catch (e) {
+        console.warn("Supabase skill sync warning:", e);
+      }
     }
   };
 
@@ -497,7 +719,11 @@ export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({
       return updated;
     });
     if (isSupabaseConfigured && supabase) {
-      await supabase.from("skills").delete().eq("id", id);
+      try {
+        await supabase.from("skills").delete().eq("id", id);
+      } catch (e) {
+        console.warn("Supabase skill delete warning:", e);
+      }
     }
   };
 
@@ -514,6 +740,25 @@ export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({
       localStorage.setItem(STORAGE_KEYS.EXPERIENCES, JSON.stringify(updated));
       return updated;
     });
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from("experiences").upsert({
+          id: exp.id,
+          company: exp.company,
+          role: exp.role,
+          location: exp.location,
+          start_date: exp.startDate,
+          end_date: exp.endDate,
+          is_current: exp.isCurrent,
+          description: exp.description,
+          tech_stack: exp.techStack,
+          sort_order: exp.order,
+          updated_at: new Date().toISOString(),
+        });
+      } catch (e) {
+        console.warn("Supabase experience sync warning:", e);
+      }
+    }
   };
 
   const deleteExperience = async (id: string) => {
@@ -522,6 +767,13 @@ export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({
       localStorage.setItem(STORAGE_KEYS.EXPERIENCES, JSON.stringify(updated));
       return updated;
     });
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from("experiences").delete().eq("id", id);
+      } catch (e) {
+        console.warn("Supabase experience delete warning:", e);
+      }
+    }
   };
 
   const reorderExperiences = async (newExps: Experience[]) => {
@@ -537,6 +789,24 @@ export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({
       localStorage.setItem(STORAGE_KEYS.EDUCATION, JSON.stringify(updated));
       return updated;
     });
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from("education").upsert({
+          id: edu.id,
+          institution: edu.institution,
+          degree: edu.degree,
+          field_of_study: edu.fieldOfStudy,
+          start_year: edu.startYear,
+          end_year: edu.endYear,
+          grade: edu.grade,
+          achievements: edu.achievements,
+          sort_order: edu.order,
+          updated_at: new Date().toISOString(),
+        });
+      } catch (e) {
+        console.warn("Supabase education sync warning:", e);
+      }
+    }
   };
 
   const deleteEducation = async (id: string) => {
@@ -545,6 +815,13 @@ export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({
       localStorage.setItem(STORAGE_KEYS.EDUCATION, JSON.stringify(updated));
       return updated;
     });
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from("education").delete().eq("id", id);
+      } catch (e) {
+        console.warn("Supabase education delete warning:", e);
+      }
+    }
   };
 
   const reorderEducation = async (newEdu: Education[]) => {
@@ -560,6 +837,27 @@ export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({
       localStorage.setItem(STORAGE_KEYS.PROJECTS, JSON.stringify(updated));
       return updated;
     });
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from("projects").upsert({
+          id: proj.id,
+          title: proj.title,
+          description: proj.description,
+          tech: proj.tech,
+          gradient: proj.gradient,
+          image: proj.image,
+          github_url: proj.githubUrl,
+          live_url: proj.liveUrl,
+          category: proj.category,
+          is_featured: proj.isFeatured,
+          is_visible: proj.isVisible,
+          sort_order: proj.order,
+          updated_at: new Date().toISOString(),
+        });
+      } catch (e) {
+        console.warn("Supabase project sync warning:", e);
+      }
+    }
   };
 
   const deleteProject = async (id: string) => {
@@ -568,6 +866,13 @@ export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({
       localStorage.setItem(STORAGE_KEYS.PROJECTS, JSON.stringify(updated));
       return updated;
     });
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from("projects").delete().eq("id", id);
+      } catch (e) {
+        console.warn("Supabase project delete warning:", e);
+      }
+    }
   };
 
   const reorderProjects = async (newProjs: Project[]) => {
@@ -583,6 +888,24 @@ export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({
       localStorage.setItem(STORAGE_KEYS.CERTIFICATES, JSON.stringify(updated));
       return updated;
     });
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from("certificates").upsert({
+          id: cert.id,
+          title: cert.title,
+          issuer: cert.issuer,
+          date: cert.date,
+          credential_id: cert.credentialId,
+          credential_url: cert.credentialUrl,
+          image: cert.image,
+          gradient: cert.gradient,
+          sort_order: cert.order,
+          updated_at: new Date().toISOString(),
+        });
+      } catch (e) {
+        console.warn("Supabase certificate sync warning:", e);
+      }
+    }
   };
 
   const deleteCertificate = async (id: string) => {
@@ -591,6 +914,13 @@ export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({
       localStorage.setItem(STORAGE_KEYS.CERTIFICATES, JSON.stringify(updated));
       return updated;
     });
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from("certificates").delete().eq("id", id);
+      } catch (e) {
+        console.warn("Supabase certificate delete warning:", e);
+      }
+    }
   };
 
   const reorderCertificates = async (newCerts: Certificate[]) => {
@@ -606,6 +936,22 @@ export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({
       localStorage.setItem(STORAGE_KEYS.GALLERY, JSON.stringify(updated));
       return updated;
     });
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from("gallery").upsert({
+          id: item.id,
+          title: item.title,
+          caption: item.caption,
+          image_url: item.imageUrl,
+          category: item.category,
+          date_added: item.dateAdded,
+          sort_order: item.order,
+          updated_at: new Date().toISOString(),
+        });
+      } catch (e) {
+        console.warn("Supabase gallery sync warning:", e);
+      }
+    }
   };
 
   const deleteGalleryItem = async (id: string) => {
@@ -614,6 +960,13 @@ export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({
       localStorage.setItem(STORAGE_KEYS.GALLERY, JSON.stringify(updated));
       return updated;
     });
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from("gallery").delete().eq("id", id);
+      } catch (e) {
+        console.warn("Supabase gallery delete warning:", e);
+      }
+    }
   };
 
   const reorderGallery = async (newItems: GalleryItem[]) => {
@@ -625,11 +978,34 @@ export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const updateResume = async (data: ResumeData) => {
     setResume(data);
     localStorage.setItem(STORAGE_KEYS.RESUME, JSON.stringify(data));
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from("resume").upsert({
+          id: SINGLETON_UUIDS.RESUME,
+          file_url: data.fileUrl,
+          file_name: data.fileName,
+          last_updated: data.lastUpdated,
+          title: data.title,
+          description: data.description,
+        });
+      } catch (e) {
+        console.warn("Supabase resume sync warning:", e);
+      }
+    }
   };
 
   const updateContactInfo = async (data: ContactInfo) => {
     setContactInfo(data);
     localStorage.setItem(STORAGE_KEYS.CONTACT, JSON.stringify(data));
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase
+          .from("contact_info")
+          .upsert({ id: SINGLETON_UUIDS.CONTACT, data, updated_at: new Date().toISOString() });
+      } catch (e) {
+        console.warn("Supabase contact sync warning:", e);
+      }
+    }
   };
 
   const saveSocialLink = async (link: SocialLink) => {
@@ -639,6 +1015,23 @@ export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({
       localStorage.setItem(STORAGE_KEYS.SOCIAL, JSON.stringify(updated));
       return updated;
     });
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from("social_links").upsert({
+          id: link.id,
+          name: link.name,
+          icon_name: link.iconName,
+          username: link.username,
+          subtext: link.subtext,
+          gradient: link.gradient,
+          url: link.url,
+          sort_order: link.order,
+          updated_at: new Date().toISOString(),
+        });
+      } catch (e) {
+        console.warn("Supabase social link sync warning:", e);
+      }
+    }
   };
 
   const deleteSocialLink = async (id: string) => {
@@ -647,6 +1040,13 @@ export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({
       localStorage.setItem(STORAGE_KEYS.SOCIAL, JSON.stringify(updated));
       return updated;
     });
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from("social_links").delete().eq("id", id);
+      } catch (e) {
+        console.warn("Supabase social link delete warning:", e);
+      }
+    }
   };
 
   const reorderSocialLinks = async (newLinks: SocialLink[]) => {
@@ -667,6 +1067,21 @@ export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({
       localStorage.setItem(STORAGE_KEYS.MESSAGES, JSON.stringify(updated));
       return updated;
     });
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from("messages").insert({
+          id: newMsg.id,
+          name: newMsg.name,
+          email: newMsg.email,
+          subject: newMsg.subject,
+          message: newMsg.message,
+          created_at: newMsg.createdAt,
+          is_read: false,
+        });
+      } catch (e) {
+        console.warn("Supabase message insert warning:", e);
+      }
+    }
   };
 
   const toggleMessageRead = async (id: string) => {
@@ -675,6 +1090,16 @@ export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({
       localStorage.setItem(STORAGE_KEYS.MESSAGES, JSON.stringify(updated));
       return updated;
     });
+    if (isSupabaseConfigured && supabase) {
+      try {
+        const target = messages.find((m) => m.id === id);
+        if (target) {
+          await supabase.from("messages").update({ is_read: !target.isRead }).eq("id", id);
+        }
+      } catch (e) {
+        console.warn("Supabase message update warning:", e);
+      }
+    }
   };
 
   const deleteMessage = async (id: string) => {
@@ -683,11 +1108,27 @@ export const PortfolioDataProvider: React.FC<{ children: React.ReactNode }> = ({
       localStorage.setItem(STORAGE_KEYS.MESSAGES, JSON.stringify(updated));
       return updated;
     });
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from("messages").delete().eq("id", id);
+      } catch (e) {
+        console.warn("Supabase message delete warning:", e);
+      }
+    }
   };
 
   const updateSEO = async (data: SEOSettings) => {
     setSeoSettings(data);
     localStorage.setItem(STORAGE_KEYS.SEO, JSON.stringify(data));
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase
+          .from("seo_settings")
+          .upsert({ id: SINGLETON_UUIDS.SEO, data, updated_at: new Date().toISOString() });
+      } catch (e) {
+        console.warn("Supabase SEO sync warning:", e);
+      }
+    }
   };
 
   const updateSettings = async (data: Settings) => {

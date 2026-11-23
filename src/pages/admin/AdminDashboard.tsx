@@ -166,11 +166,19 @@ export const AdminDashboard: React.FC = () => {
         {/* Sidebar Footer */}
         <div className="pt-4 border-t border-slate-800/80 space-y-2">
           <Button
-            onClick={() => window.open("/", "_blank")}
+            onClick={() => navigate("/")}
             variant="outline"
             className="w-full text-xs border-slate-700 bg-slate-900 text-slate-200 hover:bg-slate-800 justify-start gap-2"
           >
             <Eye className="w-4 h-4 text-primary" /> View Public Site
+          </Button>
+
+          <Button
+            onClick={() => window.open("/", "_blank")}
+            variant="ghost"
+            className="w-full text-xs text-slate-400 hover:text-white hover:bg-slate-800 justify-start gap-2"
+          >
+            <Globe className="w-4 h-4 text-secondary" /> Open In New Tab
           </Button>
 
           <Button
@@ -206,12 +214,21 @@ export const AdminDashboard: React.FC = () => {
 
           <div className="flex items-center gap-3">
             <Button
-              onClick={() => window.open("/", "_blank")}
+              onClick={() => navigate("/")}
               size="sm"
               variant="outline"
               className="hidden sm:flex text-xs border-slate-700 bg-slate-900 text-slate-200 hover:bg-slate-800 gap-1.5"
             >
-              <Eye className="w-3.5 h-3.5 text-primary" /> Preview Site
+              <Eye className="w-3.5 h-3.5 text-primary" /> View Site
+            </Button>
+
+            <Button
+              onClick={() => window.open("/", "_blank")}
+              size="sm"
+              variant="ghost"
+              className="hidden sm:flex text-xs text-slate-400 hover:text-white hover:bg-slate-800 gap-1.5"
+            >
+              <Globe className="w-3.5 h-3.5 text-secondary" /> New Tab
             </Button>
 
             <Button

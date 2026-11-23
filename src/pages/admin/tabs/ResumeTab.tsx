@@ -13,6 +13,12 @@ export const ResumeTab: React.FC = () => {
   const [formData, setFormData] = useState<ResumeData>(resume);
   const [isSaving, setIsSaving] = useState(false);
 
+  React.useEffect(() => {
+    if (resume) {
+      setFormData(resume);
+    }
+  }, [resume]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);

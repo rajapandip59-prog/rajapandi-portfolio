@@ -77,7 +77,7 @@ const About = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {about.highlights.map((achievement, index) => {
+            {(about?.highlights || []).map((achievement, index) => {
               const Icon = iconMap[achievement.iconName] || Award;
               return (
                 <motion.div

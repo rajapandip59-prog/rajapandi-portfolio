@@ -73,8 +73,8 @@ export const ProjectsTab: React.FC = () => {
 
   const handleOpenEdit = (proj: Project) => {
     setEditingId(proj.id);
-    setCurrentProj(proj);
-    setTechInput(proj.tech.join(", "));
+    setCurrentProj({ ...proj });
+    setTechInput(Array.isArray(proj.tech) ? proj.tech.join(", ") : "");
     setIsModalOpen(true);
   };
 

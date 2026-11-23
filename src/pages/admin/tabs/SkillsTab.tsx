@@ -49,7 +49,7 @@ export const SkillsTab: React.FC = () => {
 
   const handleOpenEdit = (skill: Skill) => {
     setEditingId(skill.id);
-    setCurrentSkill(skill);
+    setCurrentSkill({ ...skill });
     setIsModalOpen(true);
   };
 

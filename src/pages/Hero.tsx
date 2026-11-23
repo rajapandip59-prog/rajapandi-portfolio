@@ -112,10 +112,10 @@ const Hero = () => {
             className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8"
           >
             {[
-              { label: "Projects", value: profile.stats.projects },
-              { label: "Clients", value: profile.stats.clients },
-              { label: "Awards", value: profile.stats.awards },
-              { label: "Experience", value: profile.stats.experience },
+              { label: "Projects", value: profile.stats?.projects ?? "5+" },
+              { label: "Clients", value: profile.stats?.clients ?? "3+" },
+              { label: "Awards", value: profile.stats?.awards ?? "15+" },
+              { label: "Experience", value: profile.stats?.experience ?? "1 Years" },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}

@@ -12,6 +12,15 @@ export const AboutTab: React.FC = () => {
   const [formData, setFormData] = useState<AboutData>(about);
   const [isSaving, setIsSaving] = useState(false);
 
+  React.useEffect(() => {
+    if (about) {
+      setFormData({
+        ...about,
+        highlights: about.highlights || [],
+      });
+    }
+  }, [about]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);

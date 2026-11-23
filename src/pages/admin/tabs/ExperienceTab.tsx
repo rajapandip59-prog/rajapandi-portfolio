@@ -52,9 +52,9 @@ export const ExperienceTab: React.FC = () => {
 
   const handleOpenEdit = (exp: Experience) => {
     setEditingId(exp.id);
-    setCurrentExp(exp);
-    setDescInput(exp.description.join("\n"));
-    setTechInput(exp.techStack.join(", "));
+    setCurrentExp({ ...exp });
+    setDescInput(Array.isArray(exp.description) ? exp.description.join("\n") : "");
+    setTechInput(Array.isArray(exp.techStack) ? exp.techStack.join(", ") : "");
     setIsModalOpen(true);
   };
 

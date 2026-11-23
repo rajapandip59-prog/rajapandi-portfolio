@@ -45,7 +45,7 @@ export const EducationTab: React.FC = () => {
 
   const handleOpenEdit = (edu: Education) => {
     setEditingId(edu.id);
-    setCurrentEdu(edu);
+    setCurrentEdu({ ...edu });
     setIsModalOpen(true);
   };
 

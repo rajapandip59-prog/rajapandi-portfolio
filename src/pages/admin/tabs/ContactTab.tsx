@@ -12,6 +12,12 @@ export const ContactTab: React.FC = () => {
   const [formData, setFormData] = useState<ContactInfo>(contactInfo);
   const [isSaving, setIsSaving] = useState(false);
 
+  React.useEffect(() => {
+    if (contactInfo) {
+      setFormData(contactInfo);
+    }
+  }, [contactInfo]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);

@@ -13,6 +13,20 @@ export const ProfileTab: React.FC = () => {
   const [formData, setFormData] = useState<Profile>(profile);
   const [isSaving, setIsSaving] = useState(false);
 
+  React.useEffect(() => {
+    if (profile) {
+      setFormData({
+        ...profile,
+        stats: {
+          projects: profile.stats?.projects ?? "5+",
+          clients: profile.stats?.clients ?? "3+",
+          awards: profile.stats?.awards ?? "15+",
+          experience: profile.stats?.experience ?? "1 Years",
+        },
+      });
+    }
+  }, [profile]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);

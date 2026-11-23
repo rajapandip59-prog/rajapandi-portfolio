@@ -46,7 +46,7 @@ export const CertificatesTab: React.FC = () => {
 
   const handleOpenEdit = (cert: Certificate) => {
     setEditingId(cert.id);
-    setCurrentCert(cert);
+    setCurrentCert({ ...cert });
     setIsModalOpen(true);
   };
 

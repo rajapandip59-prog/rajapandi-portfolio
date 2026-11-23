@@ -43,7 +43,7 @@ export const SocialTab: React.FC = () => {
 
   const handleOpenEdit = (link: SocialLink) => {
     setEditingId(link.id);
-    setCurrentLink(link);
+    setCurrentLink({ ...link });
     setIsModalOpen(true);
   };
 

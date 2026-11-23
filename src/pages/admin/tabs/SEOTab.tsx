@@ -13,6 +13,12 @@ export const SEOTab: React.FC = () => {
   const [formData, setFormData] = useState<SEOSettings>(seoSettings);
   const [isSaving, setIsSaving] = useState(false);
 
+  React.useEffect(() => {
+    if (seoSettings) {
+      setFormData(seoSettings);
+    }
+  }, [seoSettings]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);

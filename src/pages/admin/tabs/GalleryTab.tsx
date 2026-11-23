@@ -43,7 +43,7 @@ export const GalleryTab: React.FC = () => {
 
   const handleOpenEdit = (item: GalleryItem) => {
     setEditingId(item.id);
-    setCurrentItem(item);
+    setCurrentItem({ ...item });
     setIsModalOpen(true);
   };
 
